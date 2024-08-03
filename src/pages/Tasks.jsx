@@ -1,5 +1,7 @@
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const Tasks = () => {
     return (
@@ -65,6 +67,26 @@ const TasksSection = () => {
     },
   ];
 
+  const tasks = [
+    { 
+      id: 1, 
+      name: 'Task 1' 
+    },
+    { 
+      id: 2, 
+      name: 'Task 2' 
+    },
+    { 
+      id: 3, 
+      name: 'Task 3' 
+    },
+    { 
+      id: 4, 
+      name: 'Task 4' 
+    },
+
+  ];
+
   return (
     <>
       <section className="tasks-section tasks">
@@ -74,17 +96,36 @@ const TasksSection = () => {
         <ScrollableMenu commands={filterCommands}/>
         <ScrollableMenu commands={sortCommands}/>
         <ul>
-          <li>Task here</li>
-          <li>Task here</li>
-          <li>Task here</li>
-          <li>Task here</li>
-          <li>Task here</li>
+          {tasks.map(task => (
+            <TaskItem 
+              key={task.id}
+              task={task}
+            />
+            
+          ))}
         </ul>
       </section>
     </>
   )
 }
 
-
+const TaskItem = ({ task }) => {
+  return (
+    <>
+    <li className="tasks-item-container">
+      <input type="radio" name="task" value={task.id} className="tasks-item-radio" />
+      <span className="task-item-text">{task.name}</span>
+      <div className="task-item-actions">
+        <button onClick={() => {}}>
+          <FontAwesomeIcon icon={faPenToSquare} />
+        </button>
+        <button onClick={() => {}}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
+    </li>
+    </>
+  )
+}
 
 export default Tasks

@@ -14,10 +14,63 @@
 }
 
 .tasks-section.tasks > h2 {
-  font-size: 2rem;
+  font-size: 2em;
 }
 
 .tasks-section.tasks > h3 {
   font-size: 1.75rem;
   text-align: start;
+}
+
+.tasks-item-container {
+  font-size: 1em;
+  text-align: start;
+  padding: 2rem;
+  margin: 1rem;
+  background-color: rgb(6, 44, 78);
+}
+
+.tasks-item-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.tasks-item-radio {
+  margin-right: 15px;
+}
+
+.task-item-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.task-item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-item-actions button {
+  background-color: #007bff;
+  color: rgb(3, 1, 1);
+  border: none;
+  padding: 1rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.task-item-actions button:hover {
+  background-color: #0056b3;
+}
+
+.task-item-actions button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.task-item-actions button:nth-child(2):hover {
+  background-color: #c82333;
 }
