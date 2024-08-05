@@ -1,3 +1,26 @@
+.sidebar_container > nav > ul {
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar_title {
-    font-size: 40px;
+  font-size: 40px;
+}
+
+
+.sidebar_icon-text-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.sidebar_icon-text-container > svg {
+  align-self: center;
+  justify-self: right;
+  font-size: 1.5em;
+}
+.sidebar_icon-text-container > span {
+  align-self: center;
+  justify-self: left;
 }

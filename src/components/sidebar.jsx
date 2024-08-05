@@ -1,25 +1,39 @@
 import "../assets/styles/sidebar.scss"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHouseChimney, faThumbTack, faCalendarDays, faUser} from '@fortawesome/free-solid-svg-icons'
 
 
 const SideBar = () => {
   return (
     <>
-      <aside>
-          <nav>
-              <h1 className="sidebar_title">LexMeet</h1>
-              <ul>
-                  <li><a href="#link1">Link 1</a></li>
-                  <li><a href="#link2">Link 2</a></li>
-                  <li><a href="#link3">Link 3</a></li>
-                  <li><a href="#link4">Link 4</a></li>
-              </ul>
-          </nav>
+      <aside className="sidebar_container">
+        <nav>
+          <h1>LexMeet</h1>
+          <ul>
+            <li>
+              <NavItem icon={faHouseChimney} text="Home" link="#TODO"/>
+              <NavItem icon={faThumbTack} text="Tasks" link="#TODO"/>
+              <NavItem icon={faCalendarDays} text="Schedule" link="#TODO"/>
+              <NavItem icon={faUser} text="Profile" link="#TODO"/>
+            </li>
+          </ul>
+        </nav>
       </aside>
-
     </>
   )
+}
 
-
+const NavItem = ({icon, text, link}) => {
+  return (
+    <>
+      <a href={link}>
+        <div className="sidebar_icon-text-container">
+          <FontAwesomeIcon icon={icon} />
+          <span>{text}</span>
+        </div>
+      </a>
+    </>
+  )
 }
 
 export default SideBar
