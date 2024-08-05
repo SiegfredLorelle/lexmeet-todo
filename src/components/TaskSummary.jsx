@@ -1,7 +1,10 @@
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip} from 'chart.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+
+ChartJS.register(ArcElement, Tooltip);
 
 const TaskSummary = ({numCompleted, totalTasks}) => {
   const percentageCompleted = numCompleted / totalTasks * 100
@@ -10,7 +13,7 @@ const TaskSummary = ({numCompleted, totalTasks}) => {
   const doughnutData = {
     labels: [
       "Completed",
-      "ToDos"
+      "Incomplete"
     ],
     datasets: [
       {
@@ -23,7 +26,7 @@ const TaskSummary = ({numCompleted, totalTasks}) => {
           '#4caf50', 
           '#e0e0e0'
         ],
-
+        hoverOffset: 4
       }
     ]
   }
@@ -31,12 +34,22 @@ const TaskSummary = ({numCompleted, totalTasks}) => {
   return (
     <>
       <div className="tasks-summary-container">
-        <div>
-          <p>Completed</p>
-          <p>90%</p>
-          <p>9/10</p>
+        <div className="tasks-summary-info-container">
+          <div className="tasks-summary-info">
+            <p className="tasks-summary-description">Completed</p>
+            <p className="tasks-summary-percentage">{percentageCompleted}%</p>
+            <p className="tasks-summary-fraction">{numCompleted}/{totalTasks}</p>
+          </div>
+          <div className="tasks-summary-doughnut-chart">
+            <Doughnut data={doughnutData} />
+          </div>
         </div>
-        <Doughnut data={doughnutData} />
+
+        <div className="tasks-summary-button-container">
+          <button>
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+        </div>
       </div>
     </>
   )

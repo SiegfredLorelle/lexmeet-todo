@@ -35,12 +35,13 @@ const TasksSection = () => {
       <section className="tasks-section tasks">
         <h2>LIST NAME</h2>
         <TaskSummary numCompleted={3} totalTasks={4} />
+        <h3>Tasks</h3>
         <ul>
-          <li>TASKS</li>
-          <li>TASKS</li>
-          <li>TASKS</li>
-          <li>TASKS</li>
-          <li>TASKS</li>
+          <li>Task here</li>
+          <li>Task here</li>
+          <li>Task here</li>
+          <li>Task here</li>
+          <li>Task here</li>
         </ul>
       </section>
     </>
