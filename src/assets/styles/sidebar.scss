@@ -1,6 +1,10 @@
 .sidebar_container > nav > ul {
+  padding: 0.25rem;
   display: flex;
   flex-direction: column;
+  background-color: pink;
+  width: 10vw;
+  height: 100vh;
 }
 
 .sidebar_title {
@@ -10,7 +14,7 @@
 
 .sidebar_icon-text-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 4fr;
   gap: 0.5rem;
   padding: 0.5rem;
 }

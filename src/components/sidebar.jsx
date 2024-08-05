@@ -8,7 +8,7 @@ const SideBar = () => {
     <>
       <aside className="sidebar_container">
         <nav>
-          <h1>LexMeet</h1>
+          {/* <h1>LexMeet</h1> */}
           <ul>
             <li>
               <NavItem icon={faHouseChimney} text="Home" link="#TODO"/>
