@@ -11,8 +11,8 @@ const SideBar = () => {
           {/* <h1>LexMeet</h1> */}
           <ul>
             <li>
-              <NavItem icon={faHouseChimney} text="Home" link="#TODO"/>
-              <NavItem icon={faThumbTack} text="Tasks" link="#TODO"/>
+              <NavItem icon={faHouseChimney} text="Home" link="/"/>
+              <NavItem icon={faThumbTack} text="Tasks" link="/tasks"/>
               <NavItem icon={faCalendarDays} text="Schedule" link="#TODO"/>
               <NavItem icon={faUser} text="Profile" link="#TODO"/>
             </li>
