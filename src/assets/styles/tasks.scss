@@ -1,9 +1,14 @@
 .tasks-section.lists {
-    width: 20vw;
-    background-color: rgb(134, 31, 134);
+  width: 20vw;
+  background-color: rgb(134, 31, 134);
 }
 
 .tasks-section.tasks {
     width: 70vw;
     background-color: violet;
+}
+
+.tasks-section > hgroup > *,
+.tasks-section > h2 {
+  text-align: start;
 }
