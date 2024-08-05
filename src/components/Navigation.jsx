@@ -6,7 +6,7 @@ import { faHouseChimney, faThumbTack, faCalendarDays, faUser} from '@fortawesome
 const SideBar = () => {
   return (
     <>
-      <aside className="sidebar_container">
+      <aside className="sidebar-container">
         <nav>
           {/* <h1>LexMeet</h1> */}
           <ul>
