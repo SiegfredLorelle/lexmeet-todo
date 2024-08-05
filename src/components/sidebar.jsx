@@ -1,10 +1,12 @@
+import "../assets/styles/sidebar.scss"
+
 
 const SideBar = () => {
   return (
     <>
       <aside>
           <nav>
-              <h2>Sidebar Navigation</h2>
+              <h1 className="sidebar_title">LexMeet</h1>
               <ul>
                   <li><a href="#link1">Link 1</a></li>
                   <li><a href="#link2">Link 2</a></li>
