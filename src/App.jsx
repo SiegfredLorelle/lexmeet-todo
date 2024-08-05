@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.scss'
-import './components/Sidebar'
-import SideBar from './components/Sidebar'
+import './components/Navigation'
+import SideBar from './components/Navigation'
 import Home from './pages/Home'
 import Tasks from './pages/Tasks'
 
