@@ -1,18 +1,28 @@
 import React, { useState } from "react";
+import Header from '../components/Header'
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Tasks = () => {
-    return (
-        <>
-          <div className="tasks-container">
-            <ListsSection />
-            <TasksSection />
-          </div>
-        </>
-    )
+  const [showListsSection, setShowListsSection] = useState(false);
+
+  const toggleListsSection = () => {
+    setShowListsSection(!showListsSection);
+  };
+
+  return (
+    <>
+      <Header toggleListsSection={toggleListsSection}/>
+      <div className="tasks-container">
+        {
+          showListsSection && <ListsSection /> 
+        }
+        <TasksSection />
+      </div>
+    </>
+  )
 }
 
 const ListsSection = () => {

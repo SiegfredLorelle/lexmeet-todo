@@ -3,8 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #b6823f;
 }
 
 .header-left {
@@ -12,10 +11,22 @@
   align-items: center;
 }
 
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 10px;
+  color: #333;
+}
+
+.hamburger-menu:hover {
+  color: #555;
+}
+
 .header-left img {
   width: 40px;
   height: 40px;
-  margin-right: 10px;
 }
 
 .header-title {
