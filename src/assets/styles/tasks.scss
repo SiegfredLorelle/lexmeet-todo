@@ -1,5 +1,11 @@
-.tasks-section {
-  position: relative; /* Ensure that the BottomControls are positioned relative to this section */
+.tasks-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  min-height: 100vh;
+  position: relative; /* Added to ensure relative positioning of child elements */
+  padding-bottom: 4rem; /* Space for BottomControls */
 }
 
 .tasks-section.tasks {
@@ -7,8 +13,6 @@
   background-color: violet;
   padding-bottom: 4rem; /* Make space for BottomControls */
 }
-
-
 
 .tasks-item-container {
   display: flex;
@@ -79,7 +83,7 @@
 }
 
 .bottom-controls-container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
