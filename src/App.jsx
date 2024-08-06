@@ -7,7 +7,6 @@ import './components/Navigation'
 import SideBar from './components/Navigation'
 import Home from './pages/Home'
 import Tasks from './pages/Tasks'
-import Header from './components/Header'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +14,6 @@ function App() {
   return (
     <>
       {/* <SideBar /> */}
-      <Header />
       <Router>
         <Routes>
           <Route path="/" element={<Tasks />} />
