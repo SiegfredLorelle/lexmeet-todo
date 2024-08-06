@@ -86,13 +86,26 @@
   background-color: #f9f9f9;
   border-top: 1px solid #ddd;
   display: flex;
+  flex-direction: column; /* Change to column for rows */
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
   gap: 1rem;
 }
 
-.bottom-controls-container button {
+.main-buttons, .additional-buttons, .menu-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%; /* Ensure full width */
+}
+
+.menu-toggle {
+  width: 30%;
+}
+
+.main-buttons button, .additional-buttons button, .menu-toggle button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -100,10 +113,9 @@
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  width:100%;
+  flex: 1; /* Adjust to ensure buttons take equal space */
 }
 
-.bottom-controls-container button:hover {
+.main-buttons button:hover, .additional-buttons button:hover, .menu-toggle button:hover {
   background-color: #0056b3;
-  transform: scale(1.05);
 }

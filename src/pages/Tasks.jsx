@@ -1,7 +1,8 @@
+import React, { useState } from "react";
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Tasks = () => {
     return (
@@ -129,11 +130,31 @@ const TaskItem = ({ task }) => {
 }
 
 const BottomControls = () => {
+  const [ isMenuOpen, setIsMenuOpen ] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prevState => !prevState);
+  };
+
   return (
     <div className="bottom-controls-container">
-      <button><FontAwesomeIcon icon={faArrowRotateLeft} /></button>
-      <button><FontAwesomeIcon icon={faPlus} /></button>
-      <button><FontAwesomeIcon icon={faEllipsis} /></button>
+      {
+        isMenuOpen && (
+          <div className="additional-buttons">
+            <button><FontAwesomeIcon icon={faTrash} /> Delete All </button>
+            <button><FontAwesomeIcon icon={faTrash} /> Delete All Complete </button>
+            <button><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
+            <button><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
+          </div>
+        )
+      }
+      <div className="main-buttons">
+        <button><FontAwesomeIcon icon={faArrowRotateLeft} /> Back </button>
+        <button><FontAwesomeIcon icon={faPlus} /> Add Task </button>
+        <div className="menu-toggle">
+          <button onClick={toggleMenu}><FontAwesomeIcon icon={faEllipsis} /></button>
+        </div>
+      </div>
     </div>
   )
 }
