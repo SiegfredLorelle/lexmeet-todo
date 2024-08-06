@@ -7,8 +7,10 @@ import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck 
 const Tasks = () => {
     return (
         <>
-          <ListsSection />
-          <TasksSection />
+          <div className="tasks-container">
+            <ListsSection />
+            <TasksSection />
+          </div>
         </>
     )
 }
