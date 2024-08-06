@@ -1,31 +1,18 @@
-.tasks-section.lists {
-  width: 20vw;
-  background-color: rgb(134, 31, 134);
+.tasks-section {
+  position: relative; /* Ensure that the BottomControls are positioned relative to this section */
 }
 
 .tasks-section.tasks {
-    width: 70vw;
-    background-color: violet;
+  width: 70vw;
+  background-color: violet;
+  padding-bottom: 4rem; /* Make space for BottomControls */
 }
 
-.tasks-section > hgroup > *,
-.tasks-section > h2 {
-  text-align: start;
-}
-
-.tasks-section.tasks > h2 {
-  font-size: 2em;
-}
-
-.tasks-section.tasks > h3 {
-  font-size: 1.75rem;
-  text-align: start;
-}
 
 
 .tasks-item-container {
   display: flex;
-  align-items: center; /* Align items vertically in the center */
+  align-items: center;
   justify-content: space-between;
   padding: 0.75rem;
   margin: 0.75rem; 
@@ -62,7 +49,7 @@
 .tasks-item-actions {
   display: flex;
   gap: 1rem;
-  align-items: stretch;
+  align-items: center;
 }
 
 .tasks-item-actions button {
@@ -89,4 +76,34 @@
 
 .tasks-item-actions button:nth-child(2):hover {
   background-color: #c82333;
+}
+
+.bottom-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+.bottom-controls-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1.25rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width:100%;
+}
+
+.bottom-controls-container button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }

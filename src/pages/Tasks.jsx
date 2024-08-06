@@ -1,7 +1,7 @@
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const Tasks = () => {
     return (
@@ -92,24 +92,19 @@ const TasksSection = () => {
   ];
 
   return (
-    <>
-      <section className="tasks-section tasks">
-        <h2>LIST NAME</h2>
-        <TaskSummary numCompleted={3} totalTasks={4} />
-        <h3>Tasks</h3>
-        <ScrollableMenu commands={filterCommands}/>
-        <ScrollableMenu commands={sortCommands}/>
-        <ul>
-          {tasks.map(task => (
-            <TaskItem 
-              key={task.id}
-              task={task}
-            />
-            
-          ))}
-        </ul>
-      </section>
-    </>
+    <section className="tasks-section tasks">
+      <h2>LIST NAME</h2>
+      <TaskSummary numCompleted={3} totalTasks={4} />
+      <h3>Tasks</h3>
+      <ScrollableMenu commands={filterCommands} />
+      <ScrollableMenu commands={sortCommands} />
+      <ul>
+        {tasks.map(task => (
+          <TaskItem key={task.id} task={task} />
+        ))}
+      </ul>
+      <BottomControls />
+    </section>
   )
 }
 
@@ -130,8 +125,17 @@ const TaskItem = ({ task }) => {
         </button>
       </div>
     </li>
-  );
-};
+  )
+}
 
+const BottomControls = () => {
+  return (
+    <div className="bottom-controls-container">
+      <button><FontAwesomeIcon icon={faArrowRotateLeft} /></button>
+      <button><FontAwesomeIcon icon={faPlus} /></button>
+      <button><FontAwesomeIcon icon={faEllipsis} /></button>
+    </div>
+  )
+}
 
 export default Tasks
