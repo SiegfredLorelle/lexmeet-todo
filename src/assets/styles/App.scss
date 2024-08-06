@@ -1,0 +1,16 @@
+#root {
+  width: 100vw;
+  // padding: 0.25rem;
+  text-align: center;
+  display: flex;
+  justify-content: start;
+  height: 100vh;
+}
+.app-container {
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}

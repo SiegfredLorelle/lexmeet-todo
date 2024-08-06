@@ -1,0 +1,21 @@
+.scrollable-menu-container {
+  display: flex;
+  overflow-x: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem;
+}
+
+.scrollable-menu-button {
+  background: #787a7c;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0rem 0.75rem;
+  cursor: pointer;
+  border-radius: 24px;
+  font-size: 0.75em;
+}
+
+.scrollable-menu-button:hover {
+  background: #0056b3;
+}

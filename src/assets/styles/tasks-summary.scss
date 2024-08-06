@@ -1,0 +1,47 @@
+.tasks-summary-container {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 1rem;
+  background-color: rgb(99, 206, 206);
+}
+
+.tasks-summary-info-container {
+  background-color: rgb(58, 59, 59);
+  height: 20vh;
+  display: flex;
+  margin: 0.5rem;
+  border-radius: 24px;
+}
+
+.tasks-summary-info {
+  width: 50%;
+}
+
+.tasks-summary-doughnut-chart {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: 50%;
+}
+
+.tasks-summary-button-container {
+  background-color: rgb(206, 197, 206); 
+  // width: 100%;
+  margin: 0.5rem;
+  border-radius: 24px;
+}
+
+.tasks-summary-button-container > button {
+  height: 100%;
+  width: 100%;
+}
+
+.tasks-summary-description {
+  
+}
+.tasks-summary-percentage {
+  
+}
+.tasks-summary-fraction {
+  
+}

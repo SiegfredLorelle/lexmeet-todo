@@ -1,0 +1,121 @@
+.tasks-section {
+  position: relative; /* Ensure that the BottomControls are positioned relative to this section */
+}
+
+.tasks-section.tasks {
+  width: 70vw;
+  background-color: violet;
+  padding-bottom: 4rem; /* Make space for BottomControls */
+}
+
+
+
+.tasks-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  margin: 0.75rem; 
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 24px;
+}
+
+.tasks-item-radio {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem; 
+}
+
+.tasks-item-text {
+  flex: 1;
+}
+
+.tasks-item-text-name {
+  display: block;
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 0.25rem;
+  text-align: start;
+}
+
+.tasks-item-text-description {
+  display: block;
+  font-size: 0.75em;
+  color: #666; 
+  text-align: start;
+}
+
+.tasks-item-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.tasks-item-actions button {
+  height: 100%;
+  background-color: #007bff;
+  color: rgb(3, 1, 1);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasks-item-actions button:hover {
+  background-color: #0056b3;
+}
+
+.tasks-item-actions button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.tasks-item-actions button:nth-child(2):hover {
+  background-color: #c82333;
+}
+
+.bottom-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column; /* Change to column for rows */
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+.main-buttons, .additional-buttons, .menu-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%; /* Ensure full width */
+}
+
+.menu-toggle {
+  width: 30%;
+}
+
+.main-buttons button, .additional-buttons button, .menu-toggle button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1.25rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  flex: 1; /* Adjust to ensure buttons take equal space */
+}
+
+.main-buttons button:hover, .additional-buttons button:hover, .menu-toggle button:hover {
+  background-color: #0056b3;
+}

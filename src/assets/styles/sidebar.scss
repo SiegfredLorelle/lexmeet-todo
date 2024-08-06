@@ -1,0 +1,30 @@
+.sidebar-container > nav > ul {
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  width: 10vw;
+  height: 100vh;
+}
+
+.sidebar_title {
+  font-size: 40px;
+}
+
+
+.sidebar_icon-text-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.sidebar_icon-text-container > svg {
+  align-self: center;
+  justify-self: right;
+  font-size: 1.5em;
+}
+.sidebar_icon-text-container > span {
+  align-self: center;
+  justify-self: left;
+}
