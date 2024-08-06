@@ -18,7 +18,7 @@ const ListsSection = () => {
     <>
       <section className="tasks-section lists">
         <hgroup>
-          <h2>Lists</h2>
+          <h2>Groups</h2>
           <p>Group your tasks into lists. (E.g., Acads, OJT, Family)</p>
         </hgroup>
         <ul>

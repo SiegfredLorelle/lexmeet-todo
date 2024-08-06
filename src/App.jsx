@@ -13,10 +13,10 @@ function App() {
 
   return (
     <>
-      <SideBar />
+      {/* <SideBar /> */}
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Tasks />} />
           <Route path="/tasks" element={<Tasks />} />
         </Routes>
       </Router>
