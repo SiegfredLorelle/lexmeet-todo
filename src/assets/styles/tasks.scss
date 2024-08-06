@@ -22,55 +22,71 @@
   text-align: start;
 }
 
-.tasks-item-container {
-  font-size: 1em;
-  text-align: start;
-  padding: 2rem;
-  margin: 1rem;
-  background-color: rgb(6, 44, 78);
-}
 
 .tasks-item-container {
   display: flex;
-  align-items: center;
-  padding: 10px;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between;
+  padding: 0.75rem;
+  margin: 0.75rem; 
   border-bottom: 1px solid #ddd;
   background-color: #f9f9f9;
+  border-radius: 24px;
 }
 
 .tasks-item-radio {
-  margin-right: 15px;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem; 
 }
 
-.task-item-text {
+.tasks-item-text {
   flex: 1;
-  font-size: 16px;
+}
+
+.tasks-item-text-name {
+  display: block;
+  font-size: 1em;
   color: #333;
+  margin-bottom: 0.25rem;
+  text-align: start;
 }
 
-.task-item-actions {
+.tasks-item-text-description {
+  display: block;
+  font-size: 0.75em;
+  color: #666; 
+  text-align: start;
+}
+
+.tasks-item-actions {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
+  align-items: stretch;
 }
 
-.task-item-actions button {
+.tasks-item-actions button {
+  height: 100%;
   background-color: #007bff;
   color: rgb(3, 1, 1);
   border: none;
-  padding: 1rem 1rem;
+  padding: 0.5rem;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.task-item-actions button:hover {
+.tasks-item-actions button:hover {
   background-color: #0056b3;
 }
 
-.task-item-actions button:nth-child(2) {
+.tasks-item-actions button:nth-child(2) {
   background-color: #dc3545;
 }
 
-.task-item-actions button:nth-child(2):hover {
+.tasks-item-actions button:nth-child(2):hover {
   background-color: #c82333;
 }

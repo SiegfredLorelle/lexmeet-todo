@@ -70,19 +70,23 @@ const TasksSection = () => {
   const tasks = [
     { 
       id: 1, 
-      name: 'Task 1' 
+      name: 'Task 1',
+      description: 'BLABLABLA' 
     },
     { 
       id: 2, 
-      name: 'Task 2' 
+      name: 'Task 2',
+      description: 'BLABLABLA' 
     },
     { 
       id: 3, 
-      name: 'Task 3' 
+      name: 'Task 3',
+      description: 'BLABLABLA' 
     },
     { 
       id: 4, 
-      name: 'Task 4' 
+      name: 'Task 4',
+      description: 'BLABLABLA' 
     },
 
   ];
@@ -111,11 +115,13 @@ const TasksSection = () => {
 
 const TaskItem = ({ task }) => {
   return (
-    <>
     <li className="tasks-item-container">
       <input type="radio" name="task" value={task.id} className="tasks-item-radio" />
-      <span className="task-item-text">{task.name}</span>
-      <div className="task-item-actions">
+      <div className="tasks-item-text">
+        <span className="tasks-item-text-name">{task.name}</span>
+        <span className="tasks-item-text-description">{task.description}</span>
+      </div>
+      <div className="tasks-item-actions">
         <button onClick={() => {}}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
@@ -124,8 +130,8 @@ const TaskItem = ({ task }) => {
         </button>
       </div>
     </li>
-    </>
-  )
-}
+  );
+};
+
 
 export default Tasks
