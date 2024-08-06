@@ -1,6 +1,6 @@
 const ScrollableMenu = ({ commands }) => {
   return (
-    <ul className="scrollable-menu">
+    <ul className="scrollable-menu-container">
       {commands.map((command, index) => (
         <li key={index}>
           <button
