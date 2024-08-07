@@ -4,7 +4,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(' ');
   const [deadline, setDeadline] = useState('');
   const [priority, setPriority] = useState('medium'); // Default to medium
 
@@ -16,6 +16,11 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
       const utcDate = now.getDate();
       const defaultDeadline = new Date(Date.UTC(utcYear, utcMonth, utcDate, 23, 59));
       setDeadline(defaultDeadline.toISOString().slice(0, 16));
+
+      setName('');
+      setDescription(' ');
+      setPriority('Medium'); 
+  
     } 
   }, [isOpen]);
 
@@ -23,13 +28,6 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
     event.preventDefault();
     const taskData = { name, description, deadline, priority };
     onSubmit(taskData);
-
-    // Clear the fields after submitting
-    setName('');
-    setDescription('');
-    setDeadline('');
-    setPriority('medium'); // Reset to default value
-
     onClose();
   };
 
@@ -48,7 +46,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
           <h2>Create Task</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="taskName">Task Name</label>
+              <label htmlFor="taskName">Name</label>
               <input
                 autoFocus
                 type="text"
@@ -59,12 +57,11 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="taskDescription">Task Description</label>
+              <label htmlFor="taskDescription">Description (Optional)</label>
               <textarea
                 id="taskDescription"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
               ></textarea>
             </div>
             <div className="form-group">
@@ -85,9 +82,9 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 onChange={(e) => setPriority(e.target.value)}
                 required
               >
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
               </select>
             </div>
             <button type="submit">Create Task</button>
