@@ -15,7 +15,7 @@ const Tasks = () => {
   const [isInfoTaskModalOpen, setIsInfoTaskModalOpen] = useState(false);
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(loadTasksFromLocalStorage());
 
   useEffect(() => {
     const loadedTasks = loadTasksFromLocalStorage();
