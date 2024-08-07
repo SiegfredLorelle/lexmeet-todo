@@ -6,7 +6,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 ChartJS.register(ArcElement, Tooltip);
 
-const TaskSummary = ({numCompleted, totalTasks}) => {
+const TaskSummary = ({numCompleted, totalTasks, openTaskModal}) => {
   const percentageCompleted = numCompleted / totalTasks * 100
   const numIncomplete =  totalTasks - numCompleted
 
@@ -46,7 +46,7 @@ const TaskSummary = ({numCompleted, totalTasks}) => {
         </div>
 
         <div className="tasks-summary-button-container">
-          <button>
+          <button onClick={openTaskModal}>
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
