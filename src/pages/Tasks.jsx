@@ -11,8 +11,9 @@ import { faCircleInfo, faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faT
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isInfoTaskModalOpen, setIsInfoTaskModalOpen] = useState(false);
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [tasks, setTasks] = useState([]);
 
   const toggleListsSection = () => {
@@ -27,14 +28,24 @@ const Tasks = () => {
     setIsTaskModalOpen(false);
   };
 
+  const openInfoTaskModal = (task) => {
+    setIsInfoTaskModalOpen(true);
+    setSelectedTask(task);
+  };
+  
+  const closeInfoTaskModal = () => {
+    setIsInfoTaskModalOpen(false);
+    setSelectedTask(null);
+  };
+
   const openEditTaskModal = (task) => {
     setIsEditTaskModalOpen(true);
-    setTaskToEdit(task);
+    setSelectedTask(task);
   };
   
   const closeEditTaskModal = () => {
     setIsEditTaskModalOpen(false);
-    setTaskToEdit(null);
+    setSelectedTask(null);
   };
 
   
@@ -75,20 +86,34 @@ const Tasks = () => {
         {
           showListsSection && <ListsSection /> 
         }
-        <TasksSection openTaskModal={openTaskModal} openEditTaskModal={openEditTaskModal} tasks={tasks} />
+        <TasksSection 
+          openTaskModal={openTaskModal} 
+          openInfoTaskModal={openInfoTaskModal} 
+          openEditTaskModal={openEditTaskModal} 
+          tasks={tasks} />
       </div>
 
       <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} onSubmit={handleCreateTaskSumbit} />
       {
-        taskToEdit && (
+        selectedTask && (
           <EditTaskModal
             isOpen={isEditTaskModalOpen}
             onClose={closeEditTaskModal}
-            task={taskToEdit}
+            task={selectedTask}
             onSubmit={handleEditTaskSubmit}
           />
         )
       }
+      {
+        isInfoTaskModalOpen && (
+          <TaskInfoModal 
+            isOpen={isInfoTaskModalOpen} 
+            onClose={closeInfoTaskModal} 
+            task={selectedTask}
+          />
+        )
+      }
+
     </>
   )
 }
@@ -113,7 +138,7 @@ const ListsSection = () => {
   )
 }
 
-const TasksSection = ({ openTaskModal, openEditTaskModal,tasks }) => {
+const TasksSection = ({ openTaskModal, openInfoTaskModal, openEditTaskModal, tasks }) => {
   const filterCommands= [
     {
       label: "All", 
@@ -162,7 +187,7 @@ const TasksSection = ({ openTaskModal, openEditTaskModal,tasks }) => {
           tasks.length === 0 ?
           (<p>No Tasks yet. Feel free to add a task.</p>) :
           tasks.map(task => (
-            <TaskItem key={task.id} openEditTaskModal={openEditTaskModal} task={task} />
+            <TaskItem key={task.id} openInfoTaskModal={openInfoTaskModal} openEditTaskModal={openEditTaskModal} task={task} />
           ))
         }
       </ul>
@@ -171,9 +196,8 @@ const TasksSection = ({ openTaskModal, openEditTaskModal,tasks }) => {
   )
 }
 
-const TaskItem = ({ openEditTaskModal, task }) => {
+const TaskItem = ({ openInfoTaskModal, openEditTaskModal, task }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
   const handleContainerClick = (e) => {
     // Ignore clicks on the action buttons
@@ -181,14 +205,6 @@ const TaskItem = ({ openEditTaskModal, task }) => {
       return;
     }
     setIsChecked(!isChecked);
-  };
-
-  const openInfoModal = () => {
-    setIsInfoModalOpen(true);
-  };
-
-  const closeInfoModal = () => {
-    setIsInfoModalOpen(false);
   };
 
   const calculateTimeLeft = (deadline) => {
@@ -217,32 +233,31 @@ const TaskItem = ({ openEditTaskModal, task }) => {
 
   return (
     <>
-    <li className="tasks-item-container" onClick={handleContainerClick}>
-      <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" checked={isChecked}
-        onChange={() => setIsChecked(!isChecked)}/>
-      <div className="tasks-item-text">
-        <div className="tasks-item-pills">
-          <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
-            {task.priority}
-          </span>
-          <span className="tasks-item-pill">{calculateTimeLeft(task.deadline)}</span>
+      <li className="tasks-item-container" onClick={handleContainerClick}>
+        <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" checked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}/>
+        <div className="tasks-item-text">
+          <div className="tasks-item-pills">
+            <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
+              {task.priority}
+            </span>
+            <span className="tasks-item-pill">{calculateTimeLeft(task.deadline)}</span>
+          </div>
+          <span className="tasks-item-text-name">{task.name}</span>
+          <span className="tasks-item-text-description">{task.description}</span>
         </div>
-        <span className="tasks-item-text-name">{task.name}</span>
-        <span className="tasks-item-text-description">{task.description}</span>
-      </div>
-      <div className="tasks-item-actions">
-        <button onClick={openInfoModal}>
-          <FontAwesomeIcon icon={faCircleInfo} />
-        </button>
-        <button onClick={() => openEditTaskModal(task)}>
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
-        <button onClick={() => {}}>
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-      </div>
-    </li>
-    <TaskInfoModal isOpen={isInfoModalOpen} onClose={closeInfoModal} task={task}/>    
+        <div className="tasks-item-actions">
+          <button onClick={() => {openInfoTaskModal(task)}}>
+            <FontAwesomeIcon icon={faCircleInfo} />
+          </button>
+          <button onClick={() => openEditTaskModal(task)}>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </button>
+          <button onClick={() => {}}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+      </li>
     </>
 
   );
