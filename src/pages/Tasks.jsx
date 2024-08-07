@@ -4,7 +4,7 @@ import CreateTaskModal from "../components/CreateTaskModal"
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircleInfo, faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
@@ -177,6 +177,9 @@ const TaskItem = ({ task }) => {
         <span className="tasks-item-text-description">{task.description}</span>
       </div>
       <div className="tasks-item-actions">
+        <button onClick={() => {}}>
+          <FontAwesomeIcon icon={faCircleInfo} />
+        </button>
         <button onClick={() => {}}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
