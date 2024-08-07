@@ -129,6 +129,12 @@ const TaskItem = ({ task }) => {
     <li className="tasks-item-container">
       <input type="radio" name="task" value={task.id} className="tasks-item-radio" />
       <div className="tasks-item-text">
+        <div className="tasks-item-pills">
+          <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
+            {task.priority}
+          </span>
+          <span className="tasks-item-pill">{new Date(task.deadline).toLocaleString()}</span>
+        </div>
         <span className="tasks-item-text-name">{task.name}</span>
         <span className="tasks-item-text-description">{task.description}</span>
       </div>
@@ -141,8 +147,8 @@ const TaskItem = ({ task }) => {
         </button>
       </div>
     </li>
-  )
-}
+  );
+};
 
 const BottomControls = ({openTaskModal}) => {
   const [ isMenuOpen, setIsMenuOpen ] = useState(false);
