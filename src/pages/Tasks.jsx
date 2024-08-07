@@ -125,6 +125,30 @@ const TasksSection = ({ openTaskModal, tasks }) => {
 }
 
 const TaskItem = ({ task }) => {
+  const calculateTimeLeft = (deadline) => {
+    const now = new Date();
+    const deadlineDate = new Date(deadline);
+    const diff = deadlineDate - now;
+
+    if (diff <= 0) {
+      return 'Passed';
+    }
+
+    const minutesLeft = Math.floor(diff / (1000 * 60));
+    const hoursLeft = Math.floor(minutesLeft / 60);
+    const daysLeft = Math.floor(hoursLeft / 24);
+
+    if (daysLeft > 0) {
+      return `${daysLeft} Day${daysLeft > 1 ? 's' : ''}`;
+    } 
+    else if (hoursLeft > 0) {
+      return `${hoursLeft} Hour${hoursLeft > 1 ? 's' : ''}`;
+    } 
+    else {
+      return `${minutesLeft} Minute${minutesLeft > 1 ? 's' : ''}`;
+    }
+  };
+
   return (
     <li className="tasks-item-container">
       <input type="radio" name="task" value={task.id} className="tasks-item-radio" />
@@ -133,7 +157,7 @@ const TaskItem = ({ task }) => {
           <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
             {task.priority}
           </span>
-          <span className="tasks-item-pill">{new Date(task.deadline).toLocaleString()}</span>
+          <span className="tasks-item-pill">{calculateTimeLeft(task.deadline)}</span>
         </div>
         <span className="tasks-item-text-name">{task.name}</span>
         <span className="tasks-item-text-description">{task.description}</span>
