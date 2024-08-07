@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import CreateTask from "../utils/CreateTask";
 import EditTask from "../utils/EditTask";
+import DeleteTask from "../utils/DeleteTask";
 import ShowTaskInfo from "../utils/ShowTaskInfo";
 import { loadTasksFromLocalStorage, saveTasksToLocalStorage } from "../utils/localStorageUtils";
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
   const [tasks, setTasks] = useState(loadTasksFromLocalStorage());
 
   useEffect(() => {
@@ -39,6 +39,11 @@ const Tasks = () => {
     setTasks(prevTasks => [...prevTasks, newTask]);
   };
 
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Header toggleListsSection={toggleListsSection} />
@@ -47,6 +52,7 @@ const Tasks = () => {
         <TasksSection
           handleNewTask={handleNewTask}
           handleEditTask={handleEditTask}
+          handleDeleteTask={handleDeleteTask}
           tasks={tasks}
         />
       </div>
@@ -72,7 +78,7 @@ const ListsSection = () => (
   </section>
 );
 
-const TasksSection = ({ handleNewTask, handleEditTask, tasks }) => {
+const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }) => {
   const filterCommands = [
     { label: "All", action: () => { } },
     { label: "Done", action: () => { } },
@@ -101,6 +107,7 @@ const TasksSection = ({ handleNewTask, handleEditTask, tasks }) => {
             <TaskItem
               key={task.id}
               handleEditTask={handleEditTask}
+              handleDeleteTask={handleDeleteTask}
               task={task}
             />
           ))
@@ -110,7 +117,7 @@ const TasksSection = ({ handleNewTask, handleEditTask, tasks }) => {
   );
 };
 
-const TaskItem = ({ handleEditTask, task }) => {
+const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleContainerClick = (e) => {
@@ -178,9 +185,9 @@ const TaskItem = ({ handleEditTask, task }) => {
           </EditTask>
         </div>
         <div onClick={(e) => { e.stopPropagation(); }}>
-          <EditTask task={task} handleEditTask={(updatedTask) => handleEditTask(updatedTask, task.id)}>
+          <DeleteTask task={task} handleDeleteTask={() => {handleDeleteTask(task.id)}}>
             <FontAwesomeIcon icon={faTrash} />
-          </EditTask>
+          </DeleteTask>
         </div>
       </div>
     </li>
