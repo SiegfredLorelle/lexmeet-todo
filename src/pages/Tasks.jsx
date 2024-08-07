@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Header from '../components/Header'
+import Header from "../components/Header"
+import TaskModal from "../components/TaskModal"
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,13 +8,23 @@ import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck 
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
-
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  
   const toggleListsSection = () => {
     setShowListsSection(!showListsSection);
+  };
+  
+  const openTaskModal = () => {
+    setIsTaskModalOpen(true);
+  };
+  
+  const closeTaskModal = () => {
+    setIsTaskModalOpen(false);
   };
 
   return (
     <>
+      <button onClick={openTaskModal}>Open Modal</button>
       <Header toggleListsSection={toggleListsSection}/>
       <div className="tasks-container">
         {
@@ -21,6 +32,8 @@ const Tasks = () => {
         }
         <TasksSection />
       </div>
+
+      <TaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} isEdit={false} />
     </>
   )
 }
