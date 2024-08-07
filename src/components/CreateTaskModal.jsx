@@ -6,19 +6,31 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [priority, setPriority] = useState('medium'); // Default to medium
+
+  useEffect(() => {
+    if (isOpen) {
+      const now = new Date();
+      const utcYear = now.getFullYear();
+      const utcMonth = now.getMonth();
+      const utcDate = now.getDate();
+      const defaultDeadline = new Date(Date.UTC(utcYear, utcMonth, utcDate, 23, 59));
+      setDeadline(defaultDeadline.toISOString().slice(0, 16));
+    } 
+  }, [isOpen]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const taskData = { "name":name, "description":description, "deadline":deadline };
-    
-    setName("");
-    setDescription("");
-    setDeadline("");
-
-    onClose();
+    const taskData = { name, description, deadline, priority };
     onSubmit(taskData);
 
+    // Clear the fields after submitting
+    setName('');
+    setDescription('');
+    setDeadline('');
+    setPriority('medium'); // Reset to default value
 
+    onClose();
   };
 
   if (!isOpen) {
@@ -64,6 +76,19 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 onChange={(e) => setDeadline(e.target.value)}
                 required
               />
+            </div>
+            <div className="form-group">
+              <label htmlFor="priority">Priority</label>
+              <select
+                id="priority"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+                required
+              >
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
             </div>
             <button type="submit">Create Task</button>
           </form>
