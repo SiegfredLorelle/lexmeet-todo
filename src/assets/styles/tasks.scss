@@ -49,6 +49,12 @@
   border-color: #000000;
 }
 
+.tasks-item-container .tasks-item-checkbox:checked + .tasks-item-text span {
+  text-decoration: line-through;
+  color: #442e2e; /* Optional: change color to indicate the task is completed */
+
+}
+
 
 .tasks-item-text {
   flex: 1;
