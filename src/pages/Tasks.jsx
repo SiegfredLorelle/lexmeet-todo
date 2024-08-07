@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header"
-import TaskModal from "../components/TaskModal"
+import CreateTaskModal from "../components/CreateTaskModal"
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,16 +24,15 @@ const Tasks = () => {
 
   return (
     <>
-      <button onClick={openTaskModal}>Open Modal</button>
       <Header toggleListsSection={toggleListsSection}/>
       <div className="tasks-container">
         {
           showListsSection && <ListsSection /> 
         }
-        <TasksSection />
+        <TasksSection openTaskModal={openTaskModal} />
       </div>
 
-      <TaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} isEdit={false} />
+      <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} />
     </>
   )
 }
@@ -58,7 +57,7 @@ const ListsSection = () => {
   )
 }
 
-const TasksSection = () => {
+const TasksSection = ({ openTaskModal }) => {
   const filterCommands= [
     {
       label: "All", 
@@ -120,7 +119,7 @@ const TasksSection = () => {
   return (
     <section className="tasks-section tasks">
       <h2>LIST NAME</h2>
-      <TaskSummary numCompleted={3} totalTasks={4} />
+      <TaskSummary numCompleted={3} totalTasks={4} openTaskModal={openTaskModal}/>
       <h3>Tasks</h3>
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
@@ -129,7 +128,7 @@ const TasksSection = () => {
           <TaskItem key={task.id} task={task} />
         ))}
       </ul>
-      <BottomControls />
+      <BottomControls openTaskModal={openTaskModal} />
     </section>
   )
 }
@@ -154,7 +153,7 @@ const TaskItem = ({ task }) => {
   )
 }
 
-const BottomControls = () => {
+const BottomControls = ({openTaskModal}) => {
   const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 
   const toggleMenu = () => {
@@ -175,7 +174,7 @@ const BottomControls = () => {
       }
       <div className="main-buttons">
         <button><FontAwesomeIcon icon={faArrowRotateLeft} /> Back </button>
-        <button><FontAwesomeIcon icon={faPlus} /> Add Task </button>
+        <button onClick={openTaskModal}><FontAwesomeIcon icon={faPlus} /> Add Task </button>
         <div className="menu-toggle">
           <button onClick={toggleMenu}><FontAwesomeIcon icon={faEllipsis} /></button>
         </div>

@@ -1,4 +1,4 @@
-const TaskModal = ( { isOpen, onClose, isEdit } ) => {
+const CreateTaskModal = ( { isOpen, onClose, isEdit } ) => {
   if (!isOpen) {
     return null;
   }
@@ -16,4 +16,4 @@ const TaskModal = ( { isOpen, onClose, isEdit } ) => {
   )
 }
 
-export default TaskModal
+export default CreateTaskModal
