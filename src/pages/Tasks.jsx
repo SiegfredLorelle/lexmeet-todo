@@ -10,6 +10,7 @@ import EditTask from "../utils/EditTask";
 import DeleteTask from "../utils/DeleteTask";
 import ShowTaskInfo from "../utils/ShowTaskInfo";
 import { loadTasksFromLocalStorage, saveTasksToLocalStorage } from "../utils/localStorageUtils";
+import { createPath } from "react-router-dom";
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
@@ -132,14 +133,25 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
 };
 
 const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(task.status === 'Complete');
 
   const handleContainerClick = (e) => {
     if (e.target.tagName === 'BUTTON' || e.target.tagName === 'svg' || e.target.tagName === 'path') {
       return;
     }
-    
     setIsChecked(!isChecked);
+    
+    const newStatus = !isChecked ? 'Complete' : 'Incomplete';
+    const completedAt = !isChecked ? new Date().toISOString() : null
+    
+    const updatedTask = {
+      ...task,
+      status: newStatus,
+      completedAt: completedAt,
+    };
+  
+    console.log(updatedTask);
+    handleEditTask(updatedTask, task.id);
   };
 
   const calculateTimeLeft = (deadline) => {
@@ -165,7 +177,10 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   };
 
   return (
-    <li className="tasks-item-container" onClick={handleContainerClick}>
+    <li 
+      className={`tasks-item-container ${isChecked ? 'completed' : ''}`} 
+      onClick={handleContainerClick}
+    >
       <input
         type="checkbox"
         name="task"
@@ -223,14 +238,14 @@ const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompl
       {isMenuOpen && (
         <div className="additional-buttons">
           <DeleteTask 
-            option={"all"}
+            option={"ALL tasks"}
             task={null} 
             handleDeleteTask={handleDeleteAllTasks}
           >
             <FontAwesomeIcon icon={faTrash} /> Delete All
           </DeleteTask>
           <DeleteTask 
-            option={"complete"}
+            option={"Completed tasks"}
             task={null} 
             handleDeleteTask={handleDeleteCompleteTasks}
           >
