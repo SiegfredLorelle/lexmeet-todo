@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header"
 import CreateTaskModal from "../components/CreateTaskModal"
+import EditTaskModal from "../components/EditTaskModal"
 import TaskInfoModal from "../components/TaskInfoModal"
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
@@ -10,6 +11,8 @@ import { faCircleInfo, faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faT
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
   const [tasks, setTasks] = useState([]);
 
   const toggleListsSection = () => {
@@ -22,6 +25,16 @@ const Tasks = () => {
   
   const closeTaskModal = () => {
     setIsTaskModalOpen(false);
+  };
+
+  const openEditTaskModal = (task) => {
+    setIsEditTaskModalOpen(true);
+    setTaskToEdit(task);
+  };
+  
+  const closeEditTaskModal = () => {
+    setIsEditTaskModalOpen(false);
+    setTaskToEdit(null);
   };
 
   
@@ -48,6 +61,13 @@ const Tasks = () => {
     console.log(newTask);
   }
 
+  const handleEditTaskSubmit = (taskId, updatedTaskData) => {
+    const updatedTasks = tasks.map(task => 
+      task.id === taskId ? { ...task, ...updatedTaskData } : task
+    );
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Header toggleListsSection={toggleListsSection}/>
@@ -55,10 +75,20 @@ const Tasks = () => {
         {
           showListsSection && <ListsSection /> 
         }
-        <TasksSection openTaskModal={openTaskModal} tasks={tasks} />
+        <TasksSection openTaskModal={openTaskModal} openEditTaskModal={openEditTaskModal} tasks={tasks} />
       </div>
 
       <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} onSubmit={handleCreateTaskSumbit} />
+      {
+        taskToEdit && (
+          <EditTaskModal
+            isOpen={isEditTaskModalOpen}
+            onClose={closeEditTaskModal}
+            task={taskToEdit}
+            onSubmit={handleEditTaskSubmit}
+          />
+        )
+      }
     </>
   )
 }
@@ -83,7 +113,7 @@ const ListsSection = () => {
   )
 }
 
-const TasksSection = ({ openTaskModal, tasks }) => {
+const TasksSection = ({ openTaskModal, openEditTaskModal,tasks }) => {
   const filterCommands= [
     {
       label: "All", 
@@ -132,7 +162,7 @@ const TasksSection = ({ openTaskModal, tasks }) => {
           tasks.length === 0 ?
           (<p>No Tasks yet. Feel free to add a task.</p>) :
           tasks.map(task => (
-            <TaskItem key={task.id} task={task} />
+            <TaskItem key={task.id} openEditTaskModal={openEditTaskModal} task={task} />
           ))
         }
       </ul>
@@ -141,7 +171,7 @@ const TasksSection = ({ openTaskModal, tasks }) => {
   )
 }
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({ openEditTaskModal, task }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
@@ -204,7 +234,7 @@ const TaskItem = ({ task }) => {
         <button onClick={openInfoModal}>
           <FontAwesomeIcon icon={faCircleInfo} />
         </button>
-        <button onClick={() => {}}>
+        <button onClick={() => openEditTaskModal(task)}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <button onClick={() => {}}>
@@ -212,8 +242,7 @@ const TaskItem = ({ task }) => {
         </button>
       </div>
     </li>
-    <TaskInfoModal isOpen={isInfoModalOpen} onClose={closeInfoModal} task={task}/>
-    
+    <TaskInfoModal isOpen={isInfoModalOpen} onClose={closeInfoModal} task={task}/>    
     </>
 
   );
