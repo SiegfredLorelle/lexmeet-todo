@@ -28,7 +28,7 @@ const Tasks = () => {
       ...taskData,
     };
     setTasks([...tasks, newTask]);
-    console.log(newTasks);
+    console.log(newTask);
   }
 
   return (
