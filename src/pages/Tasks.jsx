@@ -44,6 +44,10 @@ const Tasks = () => {
     setTasks(updatedTasks);
   };
 
+  const handleDeleteAllTasks = () => {
+    setTasks([]);
+  };
+
   return (
     <>
       <Header toggleListsSection={toggleListsSection} />
@@ -53,11 +57,12 @@ const Tasks = () => {
           handleNewTask={handleNewTask}
           handleEditTask={handleEditTask}
           handleDeleteTask={handleDeleteTask}
+          handleDeleteAllTasks={handleDeleteAllTasks}
           tasks={tasks}
         />
       </div>
 
-      <BottomControls handleNewTask={handleNewTask} />
+      <BottomControls handleNewTask={handleNewTask} handleDeleteAllTasks={handleDeleteAllTasks} />
     </>
   );
 };
@@ -185,7 +190,10 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
           </EditTask>
         </div>
         <div onClick={(e) => { e.stopPropagation(); }}>
-          <DeleteTask task={task} handleDeleteTask={() => {handleDeleteTask(task.id)}}>
+          <DeleteTask 
+            task={task} 
+            handleDeleteTask={() => {handleDeleteTask(task.id)}}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </DeleteTask>
         </div>
@@ -194,7 +202,7 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   );
 };
 
-const BottomControls = ({ handleNewTask }) => {
+const BottomControls = ({ handleNewTask, handleDeleteAllTasks }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -205,7 +213,13 @@ const BottomControls = ({ handleNewTask }) => {
     <div className="bottom-controls-container">
       {isMenuOpen && (
         <div className="additional-buttons">
-          <button><FontAwesomeIcon icon={faTrash} /> Delete All </button>
+          <DeleteTask 
+            option={"all"}
+            task={null} 
+            handleDeleteTask={handleDeleteAllTasks}
+          >
+            <FontAwesomeIcon icon={faTrash} /> Delete All
+          </DeleteTask>
           <button><FontAwesomeIcon icon={faTrash} /> Delete All Complete </button>
           <button><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
           <button><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
