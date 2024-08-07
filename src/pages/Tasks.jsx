@@ -48,6 +48,11 @@ const Tasks = () => {
     setTasks([]);
   };
 
+  const handleDeleteCompleteTasks = () => {
+    const updatedTasks = tasks.filter(task => task.status !== 'Complete');
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Header toggleListsSection={toggleListsSection} />
@@ -62,7 +67,11 @@ const Tasks = () => {
         />
       </div>
 
-      <BottomControls handleNewTask={handleNewTask} handleDeleteAllTasks={handleDeleteAllTasks} />
+      <BottomControls 
+      handleNewTask={handleNewTask} 
+      handleDeleteAllTasks={handleDeleteAllTasks}
+      handleDeleteCompleteTasks={handleDeleteCompleteTasks}
+      />
     </>
   );
 };
@@ -202,7 +211,7 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   );
 };
 
-const BottomControls = ({ handleNewTask, handleDeleteAllTasks }) => {
+const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -220,7 +229,13 @@ const BottomControls = ({ handleNewTask, handleDeleteAllTasks }) => {
           >
             <FontAwesomeIcon icon={faTrash} /> Delete All
           </DeleteTask>
-          <button><FontAwesomeIcon icon={faTrash} /> Delete All Complete </button>
+          <DeleteTask 
+            option={"complete"}
+            task={null} 
+            handleDeleteTask={handleDeleteCompleteTasks}
+          >
+            <FontAwesomeIcon icon={faTrash} /> Delete All Complete
+          </DeleteTask>
           <button><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
           <button><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
         </div>
