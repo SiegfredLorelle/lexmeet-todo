@@ -111,7 +111,8 @@
   align-items: center;
 }
 
-.tasks-item-actions button {
+.tasks-item-actions > button,
+.tasks-item-actions > div > button {
   height: 100%;
   background-color: #007bff;
   color: #fff;
@@ -125,15 +126,15 @@
   justify-content: center;
 }
 
-.tasks-item-actions button:hover {
+.tasks-item-actions > button:hover {
   background-color: #0056b3;
 }
 
-.tasks-item-actions button:nth-child(2) {
+.tasks-item-actions > div > button:nth-child(2) {
   background-color: #dc3545;
 }
 
-.tasks-item-actions button:nth-child(2):hover {
+.tasks-item-actions > button:nth-child(2):hover {
   background-color: #c82333;
 }
 

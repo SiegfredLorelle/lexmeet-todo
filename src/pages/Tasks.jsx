@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import EditTaskModal from "../components/EditTaskModal";
 import TaskInfoModal from "../components/TaskInfoModal";
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import CreateTask from "../utils/CreateTask";
+import EditTask from "../utils/EditTask";
 import { loadTasksFromLocalStorage, saveTasksToLocalStorage } from "../utils/localStorageUtils";
-
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [isInfoTaskModalOpen, setIsInfoTaskModalOpen] = useState(false);
-  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [tasks, setTasks] = useState(loadTasksFromLocalStorage());
 
@@ -40,18 +38,8 @@ const Tasks = () => {
     setSelectedTask(null);
   };
 
-  const openEditTaskModal = (task) => {
-    setIsEditTaskModalOpen(true);
-    setSelectedTask(task);
-  };
-
-  const closeEditTaskModal = () => {
-    setIsEditTaskModalOpen(false);
-    setSelectedTask(null);
-  };
-
-  const handleEditTaskSubmit = (taskId, updatedTaskData) => {
-    const updatedTasks = tasks.map(task =>
+  const handleEditTask = (updatedTaskData, taskId) => {
+    const updatedTasks = tasks.map(task => 
       task.id === taskId ? { ...task, ...updatedTaskData } : task
     );
     setTasks(updatedTasks);
@@ -68,20 +56,12 @@ const Tasks = () => {
         {showListsSection && <ListsSection />}
         <TasksSection
           handleNewTask={handleNewTask}
+          handleEditTask={handleEditTask}
           openInfoTaskModal={openInfoTaskModal}
-          openEditTaskModal={openEditTaskModal}
           tasks={tasks}
         />
       </div>
 
-      {selectedTask && (
-        <EditTaskModal
-          isOpen={isEditTaskModalOpen}
-          onClose={closeEditTaskModal}
-          task={selectedTask}
-          onSubmit={handleEditTaskSubmit}
-        />
-      )}
       {isInfoTaskModalOpen && (
         <TaskInfoModal
           isOpen={isInfoTaskModalOpen}
@@ -111,7 +91,7 @@ const ListsSection = () => (
   </section>
 );
 
-const TasksSection = ({ handleNewTask, openInfoTaskModal, openEditTaskModal, tasks }) => {
+const TasksSection = ({ handleNewTask, handleEditTask, openInfoTaskModal, tasks }) => {
   const filterCommands = [
     { label: "All", action: () => { } },
     { label: "Done", action: () => { } },
@@ -140,7 +120,7 @@ const TasksSection = ({ handleNewTask, openInfoTaskModal, openEditTaskModal, tas
             <TaskItem
               key={task.id}
               openInfoTaskModal={openInfoTaskModal}
-              openEditTaskModal={openEditTaskModal}
+              handleEditTask={handleEditTask}
               task={task}
             />
           ))
@@ -150,14 +130,14 @@ const TasksSection = ({ handleNewTask, openInfoTaskModal, openEditTaskModal, tas
   );
 };
 
-const TaskItem = ({ openInfoTaskModal, openEditTaskModal, task }) => {
+const TaskItem = ({ handleEditTask, openInfoTaskModal, task }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleContainerClick = (e) => {
-    // Ignore clicks on the action buttons
     if (e.target.tagName === 'BUTTON' || e.target.tagName === 'svg' || e.target.tagName === 'path') {
       return;
     }
+    
     setIsChecked(!isChecked);
   };
 
@@ -191,7 +171,10 @@ const TaskItem = ({ openInfoTaskModal, openEditTaskModal, task }) => {
         value={task.id}
         className="tasks-item-checkbox"
         checked={isChecked}
-        onChange={() => setIsChecked(!isChecked)}
+        onChange={(e) => {
+          e.stopPropagation();
+          setIsChecked(e.target.checked);
+        }}
       />
       <div className="tasks-item-text">
         <div className="tasks-item-pills">
@@ -204,13 +187,15 @@ const TaskItem = ({ openInfoTaskModal, openEditTaskModal, task }) => {
         <span className="tasks-item-text-description">{task.description}</span>
       </div>
       <div className="tasks-item-actions">
-        <button onClick={() => { openInfoTaskModal(task) }}>
+        <button onClick={(e) => { e.stopPropagation(); openInfoTaskModal(task); }}>
           <FontAwesomeIcon icon={faCircleInfo} />
         </button>
-        <button onClick={() => openEditTaskModal(task)}>
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
-        <button onClick={() => { }}>
+        <div onClick={(e) => { e.stopPropagation(); }}>
+          <EditTask task={task} handleEditTask={(updatedTask) => handleEditTask(updatedTask, task.id)}>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </EditTask>
+        </div>
+        <button onClick={(e) => { e.stopPropagation(); /* Add delete task logic here */ }}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
