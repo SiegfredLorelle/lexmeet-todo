@@ -1,12 +1,13 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip} from 'chart.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import CreateTask from '../utils/CreateTask';
 
 
 ChartJS.register(ArcElement, Tooltip);
 
-const TaskSummary = ({numCompleted, totalTasks, openTaskModal}) => {
+const TaskSummary = ({numCompleted, totalTasks, openTaskModal, handleNewTask}) => {
   const percentageCompleted = numCompleted / totalTasks * 100
   const numIncomplete =  totalTasks - numCompleted
 
@@ -46,9 +47,7 @@ const TaskSummary = ({numCompleted, totalTasks, openTaskModal}) => {
         </div>
 
         <div className="tasks-summary-button-container">
-          <button onClick={openTaskModal}>
-            <FontAwesomeIcon icon={faPlus} />
-          </button>
+          <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
         </div>
       </div>
     </>
