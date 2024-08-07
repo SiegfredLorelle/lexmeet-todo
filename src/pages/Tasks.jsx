@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header"
 import CreateTaskModal from "../components/CreateTaskModal"
+import TaskInfoModal from "../components/TaskInfoModal"
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,7 @@ const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
+
   const toggleListsSection = () => {
     setShowListsSection(!showListsSection);
   };
@@ -21,6 +23,7 @@ const Tasks = () => {
   const closeTaskModal = () => {
     setIsTaskModalOpen(false);
   };
+
   
   const handleCreateTaskSumbit = (taskData) => {
     const getFormattedDateTime = () => {
@@ -37,7 +40,7 @@ const Tasks = () => {
     const newTask = {
       id: tasks.length + 1,
       status: "Incomplete",
-      createdAt: getFormattedDateTime,
+      createdAt: getFormattedDateTime(),
       completedAt: null,
       ...taskData,
     };
@@ -140,6 +143,7 @@ const TasksSection = ({ openTaskModal, tasks }) => {
 
 const TaskItem = ({ task }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
   const handleContainerClick = (e) => {
     // Ignore clicks on the action buttons
@@ -147,6 +151,14 @@ const TaskItem = ({ task }) => {
       return;
     }
     setIsChecked(!isChecked);
+  };
+
+  const openInfoModal = () => {
+    setIsInfoModalOpen(true);
+  };
+
+  const closeInfoModal = () => {
+    setIsInfoModalOpen(false);
   };
 
   const calculateTimeLeft = (deadline) => {
@@ -174,6 +186,7 @@ const TaskItem = ({ task }) => {
   };
 
   return (
+    <>
     <li className="tasks-item-container" onClick={handleContainerClick}>
       <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" checked={isChecked}
         onChange={() => setIsChecked(!isChecked)}/>
@@ -188,7 +201,7 @@ const TaskItem = ({ task }) => {
         <span className="tasks-item-text-description">{task.description}</span>
       </div>
       <div className="tasks-item-actions">
-        <button onClick={() => {}}>
+        <button onClick={openInfoModal}>
           <FontAwesomeIcon icon={faCircleInfo} />
         </button>
         <button onClick={() => {}}>
@@ -199,6 +212,10 @@ const TaskItem = ({ task }) => {
         </button>
       </div>
     </li>
+    <TaskInfoModal isOpen={isInfoModalOpen} onClose={closeInfoModal} task={task}/>
+    
+    </>
+
   );
 };
 
