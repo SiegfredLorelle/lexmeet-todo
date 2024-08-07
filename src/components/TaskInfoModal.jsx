@@ -1,8 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { format, parseISO } from 'date-fns';
 
 const TaskInfoModal = ({ isOpen, onClose, task }) => {
+  const formatDate = (dateString) => {
+    return format(parseISO(dateString), 'PP p');
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -40,15 +45,21 @@ const TaskInfoModal = ({ isOpen, onClose, task }) => {
                   </tr>
                   <tr>
                     <td><strong>Deadline:</strong></td>
-                    <td id="taskDeadline">{task.deadline}</td>
+                    <td id="taskDeadline">{formatDate(task.deadline)}</td>
                   </tr>
                   <tr>
                     <td><strong>Completed At:</strong></td>
-                    <td id="taskCompletedAt">{task.completedAt || 'N/A'}</td>
+                    <td id="taskCompletedAt">
+                      {
+                        task.completedAt ? 
+                        formatDate(task.completedAt) :
+                        'N/A'
+                      }
+                      </td>
                   </tr>
                   <tr>
                     <td><strong>Date Created:</strong></td>
-                    <td id="taskDateCreated">{task.createdAt}</td>
+                    <td id="taskDateCreated">{formatDate(task.createdAt)}</td>
                   </tr>
                 </tbody>
               </table>
