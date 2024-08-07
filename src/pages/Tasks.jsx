@@ -9,7 +9,7 @@ import { faPlus, faEllipsis, faArrowRotateLeft, faPenToSquare, faTrash, faCheck 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
-  
+  const [tasks, setTasks] = useState([]);
   const toggleListsSection = () => {
     setShowListsSection(!showListsSection);
   };
@@ -23,7 +23,12 @@ const Tasks = () => {
   };
   
   const handleCreateTaskSumbit = (taskData) => {
-    console.log(taskData);
+    const newTask = {
+      id: tasks.length + 1,
+      ...taskData,
+    };
+    setTasks([...tasks, newTask]);
+    console.log(newTasks);
   }
 
   return (
@@ -33,7 +38,7 @@ const Tasks = () => {
         {
           showListsSection && <ListsSection /> 
         }
-        <TasksSection openTaskModal={openTaskModal} />
+        <TasksSection openTaskModal={openTaskModal} tasks={tasks} />
       </div>
 
       <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} onSubmit={handleCreateTaskSumbit} />
@@ -61,7 +66,7 @@ const ListsSection = () => {
   )
 }
 
-const TasksSection = ({ openTaskModal }) => {
+const TasksSection = ({ openTaskModal, tasks }) => {
   const filterCommands= [
     {
       label: "All", 
@@ -81,7 +86,7 @@ const TasksSection = ({ openTaskModal }) => {
     },
   ];
 
-  const sortCommands= [
+  const sortCommands = [
     {
       label: "Created", 
       action: () => {}
@@ -96,29 +101,7 @@ const TasksSection = ({ openTaskModal }) => {
     },
   ];
 
-  const tasks = [
-    { 
-      id: 1, 
-      name: 'Task 1',
-      description: 'BLABLABLA' 
-    },
-    { 
-      id: 2, 
-      name: 'Task 2',
-      description: 'BLABLABLA' 
-    },
-    { 
-      id: 3, 
-      name: 'Task 3',
-      description: 'BLABLABLA' 
-    },
-    { 
-      id: 4, 
-      name: 'Task 4',
-      description: 'BLABLABLA' 
-    },
 
-  ];
 
   return (
     <section className="tasks-section tasks">
@@ -128,9 +111,13 @@ const TasksSection = ({ openTaskModal }) => {
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
       <ul>
-        {tasks.map(task => (
-          <TaskItem key={task.id} task={task} />
-        ))}
+        {
+          tasks.length === 0 ?
+          (<p>No Tasks yet. Feel free to add a task.</p>) :
+          tasks.map(task => (
+            <TaskItem key={task.id} task={task} />
+          ))
+        }
       </ul>
       <BottomControls openTaskModal={openTaskModal} />
     </section>
