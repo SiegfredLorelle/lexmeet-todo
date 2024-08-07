@@ -4,7 +4,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState('');
-  const [description, setDescription] = useState(' ');
+  const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
   const [priority, setPriority] = useState('medium'); // Default to medium
 
@@ -18,9 +18,9 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
       setDeadline(defaultDeadline.toISOString().slice(0, 16));
 
       setName('');
-      setDescription(' ');
+      setDescription('');
       setPriority('Medium'); 
-  
+
     } 
   }, [isOpen]);
 
@@ -38,7 +38,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   return (
     <>
       <div className="modal-overlay" onClick={onClose}></div>
-      <div className="modal">
+      <div className="modal create-task-modal">
         <button className="close-button" onClick={onClose}>
           <FontAwesomeIcon icon={faXmark} />
         </button>
