@@ -151,7 +151,7 @@ const TaskItem = ({ task }) => {
 
   return (
     <li className="tasks-item-container">
-      <input type="radio" name="task" value={task.id} className="tasks-item-radio" />
+      <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" />
       <div className="tasks-item-text">
         <div className="tasks-item-pills">
           <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
