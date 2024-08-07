@@ -139,6 +139,16 @@ const TasksSection = ({ openTaskModal, tasks }) => {
 }
 
 const TaskItem = ({ task }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleContainerClick = (e) => {
+    // Ignore clicks on the action buttons
+    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'svg' || e.target.tagName === 'path') {
+      return;
+    }
+    setIsChecked(!isChecked);
+  };
+
   const calculateTimeLeft = (deadline) => {
     const now = new Date();
     const deadlineDate = new Date(deadline);
@@ -164,8 +174,9 @@ const TaskItem = ({ task }) => {
   };
 
   return (
-    <li className="tasks-item-container">
-      <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" />
+    <li className="tasks-item-container" onClick={handleContainerClick}>
+      <input type="checkbox" name="task" value={task.id} className="tasks-item-checkbox" checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}/>
       <div className="tasks-item-text">
         <div className="tasks-item-pills">
           <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
