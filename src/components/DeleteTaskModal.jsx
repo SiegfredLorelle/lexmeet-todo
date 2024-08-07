@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const DeleteTaskModal = ({ isOpen, onClose, task, onConfirm }) => {
+const DeleteTaskModal = ({ isOpen, onClose, task, name, onConfirm }) => {
   if (!isOpen) {
     return null;
   }
@@ -17,7 +17,7 @@ const DeleteTaskModal = ({ isOpen, onClose, task, onConfirm }) => {
         <div className="modal-content">
           <h2 className="modal-title">Delete Task</h2>
           <div className="modal-body">
-            <p>Are you sure you want to delete the task "{task.name}"?</p>
+            <p>Are you sure you want to delete the "{name}"?</p>
           </div>
           <div className="modal-footer">
             <button onClick={onClose} className="cancel-button">Cancel</button>

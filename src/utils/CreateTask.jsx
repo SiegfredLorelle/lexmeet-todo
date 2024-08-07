@@ -8,6 +8,10 @@ const CreateTask = ({ children, handleNewTask }) => {
   const openTaskModal = () => setIsTaskModalOpen(true);
   const closeTaskModal = () => setIsTaskModalOpen(false);
 
+  const generateUniqueId = () => {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+  };
+
   const handleCreateTaskSubmit = (taskData) => {
     const getFormattedDateTime = () => {
       const date = new Date();
@@ -22,7 +26,7 @@ const CreateTask = ({ children, handleNewTask }) => {
 
     const tasks = loadTasksFromLocalStorage();
     const newTask = {
-      id: tasks.length + 1,
+      id: generateUniqueId(),
       status: 'Incomplete',
       createdAt: getFormattedDateTime(),
       completedAt: null,
