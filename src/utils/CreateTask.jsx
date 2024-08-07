@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CreateTaskModal from '../components/CreateTaskModal';
-import { loadTasksFromLocalStorage } from "../utils/localStorageUtils";
+import { loadTasksFromLocalStorage } from "./localStorageUtils";
 
 const CreateTask = ({ children, handleNewTask }) => {
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
