@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const CreateTaskModal = ({ isOpen, onClose }) => {
+const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [deadline, setDeadline] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ taskName, taskDescription, deadline });
+    const taskData = { taskName, taskDescription, deadline };
+    onSubmit(taskData);
+
+    setTaskName("");
+    setTaskDescription("");
+    setDeadline("");
+
     onClose();
   };
 

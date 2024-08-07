@@ -21,6 +21,10 @@ const Tasks = () => {
   const closeTaskModal = () => {
     setIsTaskModalOpen(false);
   };
+  
+  const handleCreateTaskSumbit = (taskData) => {
+    console.log(taskData);
+  }
 
   return (
     <>
@@ -32,7 +36,7 @@ const Tasks = () => {
         <TasksSection openTaskModal={openTaskModal} />
       </div>
 
-      <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} />
+      <CreateTaskModal isOpen={isTaskModalOpen} onClose={closeTaskModal} onSubmit={handleCreateTaskSumbit} />
     </>
   )
 }
