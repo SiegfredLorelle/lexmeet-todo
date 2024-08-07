@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
   const [taskData, setTaskData] = useState({
-    name: task.name,
-    description: task.description,
-    priority: task.priority,
-    deadline: task.deadline,
+    name: '',
+    description: '',
+    priority: '',
+    deadline: '',
   });
+
+  useEffect(() => {
+    if (task) {
+      setTaskData({
+        name: task.name,
+        description: task.description,
+        priority: task.priority,
+        deadline: task.deadline,
+      });
+    }
+  }, [task]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +31,7 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(task.id, taskData);
-    onClose();
+    onSubmit(taskData);
   };
 
   if (!isOpen) {
