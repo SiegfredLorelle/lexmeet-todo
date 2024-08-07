@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
-  const [taskName, setTaskName] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const taskData = { taskName, taskDescription, deadline };
-    onSubmit(taskData);
-
-    setTaskName("");
-    setTaskDescription("");
+    const taskData = { "name":name, "description":description, "deadline":deadline };
+    
+    setName("");
+    setDescription("");
     setDeadline("");
 
     onClose();
+    onSubmit(taskData);
+
+
   };
 
   if (!isOpen) {
@@ -39,8 +41,8 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 autoFocus
                 type="text"
                 id="taskName"
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -48,8 +50,8 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
               <label htmlFor="taskDescription">Task Description</label>
               <textarea
                 id="taskDescription"
-                value={taskDescription}
-                onChange={(e) => setTaskDescription(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
             </div>
