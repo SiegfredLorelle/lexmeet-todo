@@ -14,14 +14,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgb(48, 16, 16);
+  background: $main-purple;
   padding: 2rem;
   z-index: 1001;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 80%;
   border-radius: 24px;
   max-width: 36rem;
-  pointer-events: all;
+  color: $white;
 }
 
 .modal.edit-task-modal .close-button {
@@ -33,6 +32,12 @@
   font-size: 1.25rem;
   cursor: pointer;
   padding: 1rem;
+  width: initial;
+  background-color: $main-purple;
+}
+
+.modal.create-task-modal .close-button:hover {
+  background-color: initial;
 }
 
 .modal.edit-task-modal .modal-content {
@@ -58,19 +63,29 @@
   box-sizing: border-box;
   border-radius: 16px;
   border: none;
-  background-color: rgb(5, 22, 36);
+  background-color: $white;
+  color: $dark-gray;
+  font-family: Lato, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  height: 40px;
 }
+
+.modal.edit-task-modal textarea {
+  height: auto;
+  min-height: 80px;
+}
+
 
 .modal.edit-task-modal button[type="submit"] {
   margin-top: 10px;
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: $main-orange;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 24px;
+  width: initial;
 }
 
 .modal.edit-task-modal button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: $dark-orange;
 }

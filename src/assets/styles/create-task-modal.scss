@@ -65,7 +65,14 @@
   background-color: $white;
   color: $dark-gray;
   font-family: Lato, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  height: 40px;
 }
+
+.modal.create-task-modal textarea {
+  height: auto; /* Allow textarea to adjust its height */
+  min-height: 80px; /* Set a minimum height for the description */
+}
+
 
 .modal.create-task-modal button[type="submit"] {
   margin-top: 10px;
