@@ -1,15 +1,28 @@
+import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip} from 'chart.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import CreateTask from '../utils/CreateTask';
 
-
 ChartJS.register(ArcElement, Tooltip);
 
-const TaskSummary = ({numCompleted, totalTasks, openTaskModal, handleNewTask}) => {
-  const percentageCompleted = numCompleted / totalTasks * 100
-  const numIncomplete =  totalTasks - numCompleted
+const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const percentageCompleted = ((numCompleted / totalTasks) * 100).toFixed(2);
+  const numIncomplete = totalTasks - numCompleted;
 
   const doughnutData = {
     labels: [
@@ -27,7 +40,7 @@ const TaskSummary = ({numCompleted, totalTasks, openTaskModal, handleNewTask}) =
           '#4caf50', 
           '#e0e0e0'
         ],
-        hoverOffset: 4
+        borderRadius: 8,
       }
     ]
   }
@@ -39,19 +52,19 @@ const TaskSummary = ({numCompleted, totalTasks, openTaskModal, handleNewTask}) =
           <div className="tasks-summary-info">
             <p className="tasks-summary-description">Completed</p>
             <p className="tasks-summary-percentage">{percentageCompleted}%</p>
-            <p className="tasks-summary-fraction">{numCompleted}/{totalTasks}</p>
           </div>
           <div className="tasks-summary-doughnut-chart">
             <Doughnut data={doughnutData} />
           </div>
         </div>
-
-        <div className="tasks-summary-button-container">
-          <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
-        </div>
+        {windowWidth >= 768 ? (
+          <div className="tasks-summary-button-container">
+            <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
+          </div>
+        ) : null}
       </div>
     </>
   )
 }
 
-export default TaskSummary
+export default TaskSummary;
