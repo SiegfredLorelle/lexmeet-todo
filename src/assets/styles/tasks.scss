@@ -30,6 +30,15 @@
   background-color: $dark-purple;
 }
 
+.tasks-item-container.completed {
+  background-color: $medium-gray;
+}
+
+.tasks-item-container.tasks-item-container.completed:hover {
+  background-color: $medium-gray;
+}
+
+
 .tasks-item-checkbox {
   width: 2rem;
   height: 2rem;
@@ -46,7 +55,7 @@
 }
 
 .tasks-item-checkbox:checked {
-  background-color: $main-orange
+  background-color: $light-orange
 }
 
 .tasks-item-container.completed .tasks-item-checkbox + .tasks-item-text span {
@@ -57,7 +66,7 @@
   flex: 1;
 }
 
-.tasks-item-pills {
+.tasks-item-container .tasks-item-pills {
   margin-bottom: 0.5rem;
   display: flex;
   gap: 0.5rem;
@@ -72,13 +81,17 @@
   text-align: start;
 }
 
-.tasks-item-pill {
+.tasks-item-container .tasks-item-pill {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   background-color: $main-orange;
   font-size: 0.75em;
   color: $white; 
+}
+
+.tasks-item-container.tasks-item-container.completed .tasks-item-pill {
+  background-color: $light-orange;
 }
 
 .tasks-item-actions {
@@ -113,6 +126,9 @@
       min-height: 1.5rem;
       min-width: 1.5rem;
     }
+}
+.tasks-item-container.completed .tasks-item-actions > div > button {
+  background-color: $light-orange;
 }
 
 .tasks-item-actions > div > button:hover {
