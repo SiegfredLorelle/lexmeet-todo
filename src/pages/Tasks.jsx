@@ -265,7 +265,6 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
           <span className="tasks-item-pill">{calculateTimeLeft(task.deadline)}</span>
         </div>
         <span className="tasks-item-text-name">{task.name}</span>
-        <span className="tasks-item-text-description">{task.description}</span>
       </div>
       <div className="tasks-item-actions">
         <div onClick={(e) => { e.stopPropagation(); }}>
