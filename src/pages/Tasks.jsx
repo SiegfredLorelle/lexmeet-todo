@@ -102,6 +102,8 @@ const ListsSection = () => (
 );
 
 const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }) => {
+  const numCompleted = tasks.filter(task => task.status === 'Complete').length;
+
   const filterCommands = [
     { label: "All", action: () => { } },
     { label: "Done", action: () => { } },
@@ -118,7 +120,7 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
   return (
     <section className="tasks-section tasks">
       <h2>LIST NAME</h2>
-      <TaskSummary numCompleted={3} totalTasks={4} handleNewTask={handleNewTask}/>
+      <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask}/>
       <h3>Tasks</h3>
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
