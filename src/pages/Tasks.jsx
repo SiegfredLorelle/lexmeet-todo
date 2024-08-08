@@ -297,7 +297,13 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   );
 };
 
-const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks, handleMarkAllAsComplete, handleUndo }) => {
+const BottomControls = ({
+  handleNewTask,
+  handleDeleteAllTasks,
+  handleDeleteCompleteTasks,
+  handleMarkAllAsComplete,
+  handleUndo
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -308,29 +314,31 @@ const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompl
     <div className="bottom-controls-container">
       {isMenuOpen && (
         <div className="additional-buttons">
-          <DeleteTask 
-            option={"ALL tasks"}
-            task={null} 
-            handleDeleteTask={handleDeleteAllTasks}
-          >
-            <FontAwesomeIcon icon={faTrash} /> Delete All
+          <DeleteTask option={"ALL tasks"} task={null} handleDeleteTask={handleDeleteAllTasks}>
+            <FontAwesomeIcon icon={faTrash} /> <span>Delete All</span>
           </DeleteTask>
-          <DeleteTask 
-            option={"Completed tasks"}
-            task={null} 
-            handleDeleteTask={handleDeleteCompleteTasks}
-          >
-            <FontAwesomeIcon icon={faTrash} /> Delete All Complete
+          <DeleteTask option={"Completed tasks"} task={null} handleDeleteTask={handleDeleteCompleteTasks}>
+            <FontAwesomeIcon icon={faTrash} /> <span>Delete All Complete</span>
           </DeleteTask>
-          <button onClick={() => {handleMarkAllAsComplete(true)}}><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
-          <button onClick={() => {handleMarkAllAsComplete(false)}}><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
+          <button onClick={() => {handleMarkAllAsComplete(true)}}>
+            <FontAwesomeIcon icon={faCheck} /> <span>Mark All Complete</span>
+          </button>
+          <button onClick={() => {handleMarkAllAsComplete(false)}}>
+            <FontAwesomeIcon icon={faCheck} /> <span>Mark All Incomplete</span>
+          </button>
         </div>
       )}
       <div className="main-buttons">
-        <button onClick={handleUndo}><FontAwesomeIcon icon={faArrowRotateLeft} /> Undo </button>
-        <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
+        <button onClick={handleUndo}>
+          <FontAwesomeIcon icon={faArrowRotateLeft} /> <span>Undo</span>
+        </button>
+        <CreateTask handleNewTask={handleNewTask}>
+          <FontAwesomeIcon icon={faPlus} /> <span>Add Task</span>
+        </CreateTask>
         <div className="menu-toggle">
-          <button onClick={toggleMenu}><FontAwesomeIcon icon={faEllipsis} /></button>
+          <button onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faEllipsis} />
+          </button>
         </div>
       </div>
     </div>
