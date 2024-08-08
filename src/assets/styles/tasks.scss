@@ -74,15 +74,15 @@
 
 .tasks-item-text {
   flex: 1;
-  overflow: hidden; /* Ensure content does not overflow */
+  overflow: hidden;
 }
 
 .tasks-item-container .tasks-item-pills {
   margin-bottom: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  flex-wrap: nowrap; /* Prevent pills from wrapping */
-  overflow-x: auto; /* Enable horizontal scrolling */
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .tasks-item-text-name {
@@ -91,9 +91,9 @@
   color: $light-gray;
   margin-bottom: 0.25rem;
   text-align: start;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide overflowed text */
-  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
 }
 
 .tasks-item-container .tasks-item-pill {
@@ -103,7 +103,7 @@
   background-color: $main-orange;
   font-size: 0.75em;
   color: $white;
-  white-space: nowrap; /* Prevent pills from wrapping */
+  white-space: nowrap; 
 }
 
 .tasks-item-container .priority-pill {
