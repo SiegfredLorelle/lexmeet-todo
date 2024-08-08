@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import TaskInfoModal from "../components/TaskInfoModal";
 import TaskSummary from "../components/TaskSummary";
 import ScrollableMenu from "../components/ScrollableMenu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +9,6 @@ import EditTask from "../utils/EditTask";
 import DeleteTask from "../utils/DeleteTask";
 import ShowTaskInfo from "../utils/ShowTaskInfo";
 import { loadTasksFromLocalStorage, saveTasksToLocalStorage } from "../utils/localStorageUtils";
-import { createPath } from "react-router-dom";
 
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
@@ -54,6 +52,15 @@ const Tasks = () => {
     setTasks(updatedTasks);
   };
 
+  const handleMarkAllAsComplete = (asComplete) => {
+    const updatedTasks = tasks.map(task => ({
+      ...task,
+      status: asComplete ? 'Complete' : 'Incomplete',
+      completedAt: asComplete ? new Date().toISOString() : null,
+    }));
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Header toggleListsSection={toggleListsSection} />
@@ -69,9 +76,10 @@ const Tasks = () => {
       </div>
 
       <BottomControls 
-      handleNewTask={handleNewTask} 
-      handleDeleteAllTasks={handleDeleteAllTasks}
-      handleDeleteCompleteTasks={handleDeleteCompleteTasks}
+        handleNewTask={handleNewTask} 
+        handleDeleteAllTasks={handleDeleteAllTasks}
+        handleDeleteCompleteTasks={handleDeleteCompleteTasks}
+        handleMarkAllAsComplete={handleMarkAllAsComplete}
       />
     </>
   );
@@ -135,6 +143,10 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
 const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   const [isChecked, setIsChecked] = useState(task.status === 'Complete');
 
+  useEffect(() => {
+    setIsChecked(task.status === 'Complete');
+  }, [task.status]);
+
   const handleContainerClick = (e) => {
     if (e.target.tagName === 'BUTTON' || e.target.tagName === 'svg' || e.target.tagName === 'path') {
       return;
@@ -150,7 +162,6 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
       completedAt: completedAt,
     };
   
-    console.log(updatedTask);
     handleEditTask(updatedTask, task.id);
   };
 
@@ -226,7 +237,7 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   );
 };
 
-const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks }) => {
+const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks, handleMarkAllAsComplete }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -251,8 +262,8 @@ const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompl
           >
             <FontAwesomeIcon icon={faTrash} /> Delete All Complete
           </DeleteTask>
-          <button><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
-          <button><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
+          <button onClick={() => {handleMarkAllAsComplete(true)}}><FontAwesomeIcon icon={faCheck} /> Mark All Complete </button>
+          <button onClick={() => {handleMarkAllAsComplete(false)}}><FontAwesomeIcon icon={faCheck} /> Mark All Incomplete </button>
         </div>
       )}
       <div className="main-buttons">
