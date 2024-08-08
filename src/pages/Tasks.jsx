@@ -102,13 +102,16 @@ const ListsSection = () => (
 );
 
 const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }) => {
+  const [filter, setFilter] = useState("All");
+
   const numCompleted = tasks.filter(task => task.status === 'Complete').length;
 
   const filterCommands = [
-    { label: "All", action: () => { } },
-    { label: "Done", action: () => { } },
-    { label: "Incomplete", action: () => { } },
-    { label: "Missing", action: () => { } },
+    { label: "All", action: () => setFilter("All") },
+    { label: "Done", action: () => setFilter("Complete") },
+    { label: "Incomplete", action: () => setFilter("Incomplete") },
+    { label: "Passed Deadline", action: () => setFilter("Passed Deadline") },
+    { label: "Missing", action: () => setFilter("Missing") },
   ];
 
   const sortCommands = [
@@ -116,6 +119,25 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
     { label: "Deadline", action: () => { } },
     { label: "Priority", action: () => { } },
   ];
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "All") {
+      return true;
+    } 
+    else if (filter === "Passed Deadline") {
+      const currentDateTime = new Date();
+      const taskDeadline = new Date(task.deadline);
+      return taskDeadline < currentDateTime;
+    } 
+    else if (filter === "Missing") {
+      const currentDateTime = new Date();
+      const taskDeadline = new Date(task.deadline);
+      return taskDeadline < currentDateTime && task.status !== 'Complete';
+    }
+    else {
+      return task.status === filter;
+    }
+  });
 
   return (
     <section className="tasks-section tasks">
@@ -125,10 +147,10 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
       <ul>
-        {tasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <p>No Tasks yet. Feel free to add a task.</p>
         ) : (
-          tasks.map(task => (
+          filteredTasks.map(task => (
             <TaskItem
               key={task.id}
               handleEditTask={handleEditTask}
@@ -141,6 +163,7 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
     </section>
   );
 };
+
 
 const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   const [isChecked, setIsChecked] = useState(task.status === 'Complete');
