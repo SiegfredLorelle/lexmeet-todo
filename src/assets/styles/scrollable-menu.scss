@@ -14,8 +14,14 @@
   cursor: pointer;
   border-radius: 24px;
   font-size: 0.75em;
+  outline: 0;
 }
 
 .scrollable-menu-button:hover {
   background: #0056b3;
+}
+
+.scrollable-menu-button.selected {
+  background: #0056b3;
+  color: #fff;
 }
