@@ -13,15 +13,22 @@ import { loadTasksFromLocalStorage, saveTasksToLocalStorage } from "../utils/loc
 const Tasks = () => {
   const [showListsSection, setShowListsSection] = useState(false);
   const [tasks, setTasks] = useState(loadTasksFromLocalStorage());
+  const [tasksStack, setTasksStack] = useState([loadTasksFromLocalStorage()]);
 
   useEffect(() => {
     const loadedTasks = loadTasksFromLocalStorage();
     setTasks(loadedTasks);
+    setTasksStack([loadedTasks]);
   }, []);
 
   useEffect(() => {
     saveTasksToLocalStorage(tasks);
   }, [tasks]);
+
+  const updateTasks = (newTasks) => {
+    setTasksStack((prevStack) => [...prevStack, newTasks]);
+    setTasks(newTasks);
+  };
 
   const toggleListsSection = () => {
     setShowListsSection(!showListsSection);
@@ -31,25 +38,25 @@ const Tasks = () => {
     const updatedTasks = tasks.map(task => 
       task.id === taskId ? { ...task, ...updatedTaskData } : task
     );
-    setTasks(updatedTasks);
+    updateTasks(updatedTasks);
   };
 
   const handleNewTask = (newTask) => {
-    setTasks(prevTasks => [...prevTasks, newTask]);
+    updateTasks([...tasks, newTask]);
   };
 
   const handleDeleteTask = (taskId) => {
     const updatedTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(updatedTasks);
+    updateTasks(updatedTasks);
   };
 
   const handleDeleteAllTasks = () => {
-    setTasks([]);
+    updateTasks([]);
   };
 
   const handleDeleteCompleteTasks = () => {
     const updatedTasks = tasks.filter(task => task.status !== 'Complete');
-    setTasks(updatedTasks);
+    updateTasks(updatedTasks);
   };
 
   const handleMarkAllAsComplete = (asComplete) => {
@@ -58,7 +65,15 @@ const Tasks = () => {
       status: asComplete ? 'Complete' : 'Incomplete',
       completedAt: asComplete ? new Date().toISOString() : null,
     }));
-    setTasks(updatedTasks);
+    updateTasks(updatedTasks);
+  };
+
+  const handleUndo = () => {
+    if (tasksStack.length > 1) {
+      const newStack = tasksStack.slice(0, -1);
+      setTasksStack(newStack);
+      setTasks(newStack[newStack.length - 1]);
+    }
   };
 
   return (
@@ -80,6 +95,7 @@ const Tasks = () => {
         handleDeleteAllTasks={handleDeleteAllTasks}
         handleDeleteCompleteTasks={handleDeleteCompleteTasks}
         handleMarkAllAsComplete={handleMarkAllAsComplete}
+        handleUndo={handleUndo}
       />
     </>
   );
@@ -143,21 +159,20 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
   const sortedTasks = filteredTasks.sort((a, b) => {
     if (sort === "Created") {
       return new Date(a.createdAt) - new Date(b.createdAt);
-    } 
-    else if (sort === "Deadline") {
+    } else if (sort === "Deadline") {
       return new Date(a.deadline) - new Date(b.deadline);
-    } 
-    else if (sort === "Priority") {
-      const priorityOrder = ["High", "Medium", "Low"];
-      return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority);
+    } else if (sort === "Priority") {
+      const priorityMap = { High: 3, Medium: 2, Low: 1 };
+      return priorityMap[b.priority] - priorityMap[a.priority];
+    } else {
+      return 0;
     }
-    return 0;
   });
 
   return (
     <section className="tasks-section tasks">
       <h2>LIST NAME</h2>
-      <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask} />
+      <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask}/>
       <h3>Tasks</h3>
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
@@ -178,7 +193,6 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
     </section>
   );
 };
-
 
 const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   const [isChecked, setIsChecked] = useState(task.status === 'Complete');
@@ -277,7 +291,7 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
   );
 };
 
-const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks, handleMarkAllAsComplete }) => {
+const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompleteTasks, handleMarkAllAsComplete, handleUndo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -307,7 +321,7 @@ const BottomControls = ({ handleNewTask, handleDeleteAllTasks, handleDeleteCompl
         </div>
       )}
       <div className="main-buttons">
-        <button><FontAwesomeIcon icon={faArrowRotateLeft} /> Back </button>
+        <button onClick={handleUndo}><FontAwesomeIcon icon={faArrowRotateLeft} /> Undo </button>
         <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
         <div className="menu-toggle">
           <button onClick={toggleMenu}><FontAwesomeIcon icon={faEllipsis} /></button>
