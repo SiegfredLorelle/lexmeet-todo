@@ -21,7 +21,7 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
     };
   }, []);
 
-  const percentageCompleted = ((numCompleted / totalTasks) * 100).toFixed(2);
+  const percentageCompleted = totalTasks > 0 ? ((numCompleted / totalTasks) * 100).toFixed(2) : 0;
   const numIncomplete = totalTasks - numCompleted;
 
   const doughnutData = {
