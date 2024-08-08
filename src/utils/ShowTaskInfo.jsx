@@ -4,7 +4,7 @@ import TaskInfoModal from "../components/TaskInfoModal";
 const ShowTaskInfo = ({task, children}) => {
   const [isInfoTaskModalOpen, setIsInfoTaskModalOpen] = useState(false);
 
-  const openInfoTaskModal = (task) => {
+  const openInfoTaskModal = () => {
     setIsInfoTaskModalOpen(true);
   };
 
