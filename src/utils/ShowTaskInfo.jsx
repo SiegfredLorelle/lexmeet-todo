@@ -6,12 +6,10 @@ const ShowTaskInfo = ({task, children}) => {
 
   const openInfoTaskModal = (task) => {
     setIsInfoTaskModalOpen(true);
-    setSelectedTask(task);
   };
 
   const closeInfoTaskModal = () => {
     setIsInfoTaskModalOpen(false);
-    setSelectedTask(null);
   };
 
   return (
