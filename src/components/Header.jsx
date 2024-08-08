@@ -7,9 +7,9 @@ const Header = ({ toggleListsSection }) => {
     <>
       <header className="header">
         <div className="header-left">
-          <button className="hamburger-menu" onClick={toggleListsSection}>
+          {/* <button className="hamburger-menu" onClick={toggleListsSection}>
             <FontAwesomeIcon icon={faBars} />
-          </button>
+          </button> */}
           <img src="logo.png" alt="Logo" />
           <h1 className="header-title">ToDo dudu</h1>
         </div>
