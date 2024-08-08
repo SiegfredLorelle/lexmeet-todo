@@ -103,6 +103,7 @@ const ListsSection = () => (
 
 const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }) => {
   const [filter, setFilter] = useState("All");
+  const [sort, setSort] = useState("Created");
 
   const numCompleted = tasks.filter(task => task.status === 'Complete').length;
 
@@ -115,9 +116,9 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
   ];
 
   const sortCommands = [
-    { label: "Created", action: () => { } },
-    { label: "Deadline", action: () => { } },
-    { label: "Priority", action: () => { } },
+    { label: "Created", action: () => setSort("Created") },
+    { label: "Deadline", action: () => setSort("Deadline") },
+    { label: "Priority", action: () => setSort("Priority") },
   ];
 
   const filteredTasks = tasks.filter(task => {
@@ -139,18 +140,32 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
     }
   });
 
+  const sortedTasks = filteredTasks.sort((a, b) => {
+    if (sort === "Created") {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    } 
+    else if (sort === "Deadline") {
+      return new Date(a.deadline) - new Date(b.deadline);
+    } 
+    else if (sort === "Priority") {
+      const priorityOrder = ["High", "Medium", "Low"];
+      return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority);
+    }
+    return 0;
+  });
+
   return (
     <section className="tasks-section tasks">
       <h2>LIST NAME</h2>
-      <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask}/>
+      <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask} />
       <h3>Tasks</h3>
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
       <ul>
-        {filteredTasks.length === 0 ? (
+        {sortedTasks.length === 0 ? (
           <p>No Tasks yet. Feel free to add a task.</p>
         ) : (
-          filteredTasks.map(task => (
+          sortedTasks.map(task => (
             <TaskItem
               key={task.id}
               handleEditTask={handleEditTask}
