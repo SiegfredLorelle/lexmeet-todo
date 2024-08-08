@@ -10,7 +10,7 @@
 
 .tasks-section.tasks {
   width: 100%;
-  background-color: violet;
+  background-color: $white;
   padding-bottom: 4rem;
 }
 
@@ -20,10 +20,14 @@
   justify-content: space-between;
   padding: 0.75rem;
   margin: 0.75rem; 
-  border-bottom: 1px solid #ddd;
-  background-color: #f9f9f9;
+  background-color: $main-purple;
+  transition: background-color 0.3s;
   border-radius: 24px;
   cursor: pointer;
+}
+
+.tasks-item-container:hover {
+  background-color: $dark-purple;
 }
 
 .tasks-item-checkbox {
@@ -33,16 +37,16 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: 2px solid #ccc;
   border-radius: 50%;
   outline: none;
   cursor: pointer;
   position: relative;
+  background-color: $white
+  
 }
 
 .tasks-item-checkbox:checked {
-  background-color: #007bff;
-  border-color: #000000;
+  background-color: $main-orange
 }
 
 .tasks-item-container.completed .tasks-item-checkbox + .tasks-item-text span {
@@ -63,15 +67,8 @@
 .tasks-item-text-name {
   display: block;
   font-size: 1em;
-  color: #333;
+  color: $light-gray;
   margin-bottom: 0.25rem;
-  text-align: start;
-}
-
-.tasks-item-text-description {
-  display: block;
-  font-size: 0.75em;
-  color: #666; 
   text-align: start;
 }
 
@@ -79,23 +76,9 @@
   display: inline-block;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
-  background-color: #e0e0e0;
+  background-color: $main-orange;
   font-size: 0.75em;
-  color: #fff; 
-}
-
-.priority-high {
-  background-color: #ff4d4d; 
-}
-
-.priority-medium {
-  background-color: #ffd700; 
-  color: #000;
-}
-
-.priority-low {
-  background-color: #90ee90;
-  color: #000;
+  color: $white; 
 }
 
 .tasks-item-actions {
@@ -115,8 +98,8 @@
 .tasks-item-actions > div > button {
   min-height: 2rem;
   min-width: 2rem;
-  background-color: #007bff;
-  color: #fff;
+  background-color: $main-orange;
+  color: $white;
   border: none;
   padding: 0.5rem;
   border-radius: 12px;
@@ -133,7 +116,7 @@
 }
 
 .tasks-item-actions > div > button:hover {
-  background-color: #0056b3;
+  background-color: $dark-orange;
 }
 
 
