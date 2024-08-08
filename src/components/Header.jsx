@@ -11,7 +11,7 @@ const Header = ({ toggleListsSection }) => {
             <FontAwesomeIcon icon={faBars} />
           </button> */}
           <img src="logo.png" alt="Logo" />
-          <h1 className="header-title">ToDo dudu</h1>
+          <h1 className="header-title">ToDo DuDu</h1>
         </div>
       </header>
     </>
