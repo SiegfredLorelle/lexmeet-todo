@@ -51,6 +51,7 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
             <div className="form-group">
               <label htmlFor="taskName">Name</label>
               <input
+                autoFocus
                 type="text"
                 id="taskName"
                 name="name"

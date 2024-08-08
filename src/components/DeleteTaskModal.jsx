@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const DeleteTaskModal = ({ isOpen, onClose, task, name, onConfirm }) => {
+const DeleteTaskModal = ({ isOpen, onClose, name, onConfirm }) => {
   if (!isOpen) {
     return null;
   }
@@ -20,7 +20,7 @@ const DeleteTaskModal = ({ isOpen, onClose, task, name, onConfirm }) => {
             <p>Are you sure you want to delete the "{name}"?</p>
           </div>
           <div className="modal-footer">
-            <button onClick={onClose} className="cancel-button">Cancel</button>
+            <button autoFocus onClick={onClose} className="cancel-button">Cancel</button>
             <button onClick={onConfirm} className="confirm-button">Delete</button>
           </div>
         </div>
