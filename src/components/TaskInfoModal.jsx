@@ -27,39 +27,35 @@ const TaskInfoModal = ({ isOpen, onClose, task }) => {
                 <tbody>
                   <tr>
                     <td><strong>Name:</strong></td>
-                    <td id="taskName">{task.name}</td>
+                    <td id="taskName" className="task-info-content">{task.name}</td>
                   </tr>
                   <tr>
                     <td><strong>Description:</strong></td>
-                    <td id="taskDescription">{task.description || 'N/A'}</td>
+                    <td id="taskDescription" className="task-info-content">{task.description || 'N/A'}</td>
                   </tr>
                   <tr>
                     <td><strong>Priority:</strong></td>
-                    <td id="taskPriority">
+                    <td id="taskPriority" className="task-info-content">
                       {task.priority}
                     </td>
                   </tr>
                   <tr>
                     <td><strong>Status:</strong></td>
-                    <td id="taskStatus">{task.status}</td>
+                    <td id="taskStatus" className="task-info-content">{task.status}</td>
                   </tr>
                   <tr>
                     <td><strong>Deadline:</strong></td>
-                    <td id="taskDeadline">{formatDate(task.deadline)}</td>
+                    <td id="taskDeadline" className="task-info-content">{formatDate(task.deadline)}</td>
                   </tr>
                   <tr>
                     <td><strong>Completed At:</strong></td>
-                    <td id="taskCompletedAt">
-                      {
-                        task.completedAt ? 
-                        formatDate(task.completedAt) :
-                        'N/A'
-                      }
-                      </td>
+                    <td id="taskCompletedAt" className="task-info-content">
+                      {task.completedAt ? formatDate(task.completedAt) : 'N/A'}
+                    </td>
                   </tr>
                   <tr>
                     <td><strong>Date Created:</strong></td>
-                    <td id="taskDateCreated">{formatDate(task.createdAt)}</td>
+                    <td id="taskDateCreated" className="task-info-content">{formatDate(task.createdAt)}</td>
                   </tr>
                 </tbody>
               </table>
