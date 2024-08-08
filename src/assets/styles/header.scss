@@ -3,7 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #b6823f;
+  background-color: $white;
+  color: $dark-gray;
 }
 
 .header-left {
@@ -17,7 +18,6 @@
   cursor: pointer;
   font-size: 24px;
   margin-right: 10px;
-  color: #333;
 }
 
 .hamburger-menu:hover {
@@ -30,21 +30,6 @@
 }
 
 .header-title {
-  font-size: 24px;
-  color: #333;
+  font-size: 1.5rem;
   margin: 0;
-}
-
-.header-right .search-button {
-  background: url('search-icon.png') no-repeat center center;
-  background-size: 20px 20px;
-  width: 40px;
-  height: 40px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.header-right .search-button:hover {
-  background-color: #e0e0e0;
 }

@@ -79,8 +79,10 @@ const Tasks = () => {
   return (
     <>
       <Header toggleListsSection={toggleListsSection} />
+      <div className="groups-container">
+      <ListsSection showListsSection={showListsSection} />
+      </div>
       <div className="tasks-container">
-        {showListsSection && <ListsSection />}
         <TasksSection
           handleNewTask={handleNewTask}
           handleEditTask={handleEditTask}
@@ -89,6 +91,7 @@ const Tasks = () => {
           tasks={tasks}
         />
       </div>
+
 
       <BottomControls 
         handleNewTask={handleNewTask} 
@@ -101,18 +104,16 @@ const Tasks = () => {
   );
 };
 
-const ListsSection = () => (
-  <section className="tasks-section lists">
+const ListsSection = ({ showListsSection }) => (
+  <section className={`tasks-section lists ${showListsSection ? 'visible' : ''}`}>
     <hgroup>
-      <h2>Groups</h2>
-      <p>Group your tasks into lists. (E.g., Acads, OJT, Family)</p>
+      <h2>Groups (Work in Progress)</h2>
+      <p>Group your tasks.</p>
     </hgroup>
     <ul>
-      <li>LISTS</li>
-      <li>LISTS</li>
-      <li>LISTS</li>
-      <li>LISTS</li>
-      <li>LISTS</li>
+      <li>Placeholder Group A</li>
+      <li>Placeholder Group B</li>
+      <li>Placeholder Group C</li>
     </ul>
   </section>
 );
@@ -171,14 +172,14 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
 
   return (
     <section className="tasks-section tasks">
-      {/* <h2>LIST NAME</h2> */}
+      {/* <h2>Group NAME</h2> */}
       <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask}/>
       {/* <h3>Tasks</h3> */}
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
       <ul>
         {sortedTasks.length === 0 ? (
-          <p>No Tasks yet. Feel free to add a task.</p>
+          <p className="no-task-message">No Tasks yet. Feel free to add a task.</p>
         ) : (
           sortedTasks.map(task => (
             <TaskItem
