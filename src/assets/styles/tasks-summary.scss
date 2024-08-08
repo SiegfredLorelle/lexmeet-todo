@@ -1,11 +1,10 @@
 .tasks-summary-container {
   display: grid;
   grid-template-columns: 1fr;
+  border-radius: 24px;
   gap: 1rem;
-  background-color: rgb(99, 206, 206);
-  padding: 1rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  max-width: 100%;
 
   @media(min-width: 768px) {
     grid-template-columns: 4fr 1fr;
@@ -13,10 +12,9 @@
 }
 
 .tasks-summary-info-container {
-  background-color: rgb(58, 59, 59);
+  background-color: $main-purple;
   height: 20vh;
   display: flex;
-  margin: 0.5rem;
   border-radius: 24px;
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,7 +27,7 @@
   justify-content: center;
   align-items: flex-start;
   height: 100%;
-  color: white;
+  color: $white;
 }
 
 .tasks-summary-doughnut-chart {
@@ -40,14 +38,12 @@
 }
 
 .tasks-summary-button-container {
-  background-color: rgb(206, 197, 206); 
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
   border-radius: 24px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  background-color: $main-orange;
 }
 
 .tasks-summary-button-container > button {
@@ -55,15 +51,18 @@
   width: 100%;
   border: none;
   background: none;
-  font-size: 1.2em;
-  color: rgb(58, 59, 59);
+  font-size: 1.25em;
+  color: $white;
   cursor: pointer;
 }
 
 .tasks-summary-description {
   text-align: left;
-  font-size: 1.2em;
-  margin-bottom: 0.5rem;
+  font-size: 1.25em;
+
+  @media(max-width: 425px) {
+    font-size: 1em;
+  }
 }
 
 .tasks-summary-percentage {
@@ -72,4 +71,9 @@
   text-align: center;
   width: 100%;
   font-weight: bold;
+  color: $white;
+
+  @media(max-width: 425px) {
+    font-size: 2em;
+  }
 }

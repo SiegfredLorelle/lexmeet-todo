@@ -37,13 +37,27 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
           numIncomplete
         ],
         backgroundColor: [
-          '#4caf50', 
+          '#e26d1f', 
           '#e0e0e0'
         ],
         borderRadius: 8,
       }
     ]
   }
+
+  const doughnutOptions = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            const value = tooltipItem.raw || 0;
+            const percentage = ((value / totalTasks) * 100).toFixed(2);
+            return ` ${value} (${percentage}%)`;
+          }
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -54,7 +68,7 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
             <p className="tasks-summary-percentage">{percentageCompleted}%</p>
           </div>
           <div className="tasks-summary-doughnut-chart">
-            <Doughnut data={doughnutData} />
+            <Doughnut data={doughnutData} options={doughnutOptions} />
           </div>
         </div>
         {windowWidth >= 768 ? (
