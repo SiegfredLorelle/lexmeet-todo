@@ -69,8 +69,8 @@
 }
 
 .modal.create-task-modal textarea {
-  height: auto; /* Allow textarea to adjust its height */
-  min-height: 80px; /* Set a minimum height for the description */
+  height: auto;
+  min-height: 80px;
 }
 
 
@@ -78,7 +78,7 @@
   margin-top: 10px;
   padding: 10px 15px;
   background-color: $main-orange;
-  color: white;
+  color:$white;
   border: none;
   cursor: pointer;
   border-radius: 24px;
