@@ -13,13 +13,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #000000;
   padding: 2rem;
   z-index: 1001;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: $main-purple;
   width: 80%;
   max-width: 36rem;
   border-radius: 24px;
+  color: $white;
 }
 
 .modal.delete-task-modal .close-button {
@@ -35,50 +35,54 @@
 
 .modal.delete-task-modal .modal-content {
   margin-top: 20px;
+  overflow: hidden;
 
   .modal-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #fff;
     text-align: left;
+    color: $white;
   }
 
   .modal-body {
-    color: #fff;
+    color: $white;
+    padding: 1rem;
     p {
       margin: 0;
-      padding:1rem;
     }
+    text-align: left;
   }
 
   .modal-footer {
+    margin-top: 20px;
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-  }
 
-  .confirm-button,
-  .cancel-button {
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 24px;
-  }
+    .confirm-button,
+    .cancel-button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 24px;
+    }
 
-  .confirm-button {
-    background-color: #d9534f;
-    color: white;
-  }
+    .confirm-button {
+      background-color: $main-purple;
+      color: white;
 
-  .confirm-button:hover {
-    background-color: #c9302c;
-  }
+      &:hover {
+        background-color: $dark-purple;
+      }
+    }
 
-  .cancel-button {
-    background-color: #f0f0f0;
-  }
+    .cancel-button {
+      background-color: $main-orange;
+      // color: ;
 
-  .cancel-button:hover {
-    background-color: #e0e0e0;
+      &:hover {
+        background-color: $dark-orange;
+      }
+    }
   }
 }
