@@ -6,6 +6,11 @@
   min-height: 100vh;
   position: relative;
   padding-bottom: 4rem;
+
+  @media (min-width: 768px) {
+    width: 80%;
+    margin: 0 auto; /* Center the container horizontally */
+  }
 }
 
 .tasks-section.tasks {
