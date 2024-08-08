@@ -59,7 +59,7 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
         </div>
         {windowWidth >= 768 ? (
           <div className="tasks-summary-button-container">
-            <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} /> Add Task</CreateTask>
+            <CreateTask handleNewTask={handleNewTask}><FontAwesomeIcon icon={faPlus} />  Add Task</CreateTask>
           </div>
         ) : null}
       </div>
