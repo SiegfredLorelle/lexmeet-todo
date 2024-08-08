@@ -41,6 +41,7 @@
 
 .tasks-section.tasks .no-task-message {
   height: 100%;
+  padding: 1rem;
 }
 
 .tasks-item-container {
@@ -90,9 +91,7 @@
   background-color: $light-gray;
 }
 
-.tasks-item-checkbox:checked {
-  // background-color: $light-purple;
-}
+
 
 .tasks-item-container.completed .tasks-item-checkbox + .tasks-item-text span {
   text-decoration: line-through;
