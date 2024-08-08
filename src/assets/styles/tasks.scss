@@ -69,6 +69,7 @@
 
 .tasks-item-text {
   flex: 1;
+  overflow: hidden; /* Ensure content does not overflow */
 }
 
 .tasks-item-container .tasks-item-pills {
@@ -84,6 +85,9 @@
   color: $light-gray;
   margin-bottom: 0.25rem;
   text-align: start;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
 }
 
 .tasks-item-container .tasks-item-pill {
