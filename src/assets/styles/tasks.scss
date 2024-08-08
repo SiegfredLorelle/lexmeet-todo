@@ -24,6 +24,13 @@
   transition: background-color 0.3s;
   border-radius: 24px;
   cursor: pointer;
+  
+  @media (min-width: 768px) {
+    &:hover .tasks-item-actions {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 .tasks-item-container:hover {
@@ -38,7 +45,6 @@
   background-color: $medium-gray;
 }
 
-
 .tasks-item-checkbox {
   width: 2rem;
   height: 2rem;
@@ -50,12 +56,11 @@
   outline: none;
   cursor: pointer;
   position: relative;
-  background-color: $white
-  
+  background-color: $white;
 }
 
 .tasks-item-checkbox:checked {
-  background-color: $light-orange
+  background-color: $light-orange;
 }
 
 .tasks-item-container.completed .tasks-item-checkbox + .tasks-item-text span {
@@ -87,7 +92,7 @@
   border-radius: 12px;
   background-color: $main-orange;
   font-size: 0.75em;
-  color: $white; 
+  color: $white;
 }
 
 .tasks-item-container.tasks-item-container.completed .tasks-item-pill {
@@ -98,6 +103,13 @@
   display: flex;
   gap: 0.5rem;
   align-items: stretch; /* Ensure action buttons take the entire height */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  @media (min-width: 768px) {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
   @media (max-width: 425px) {
     gap: 0.25rem;
   }
@@ -121,12 +133,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: 425px) {
-      min-height: 1.5rem;
-      min-width: 1.5rem;
-    }
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+  }
 }
+
 .tasks-item-container.completed .tasks-item-actions > div > button {
   background-color: $light-orange;
 }
@@ -134,7 +147,6 @@
 .tasks-item-actions > div > button:hover {
   background-color: $dark-orange;
 }
-
 
 .bottom-controls-container {
   position: fixed;
