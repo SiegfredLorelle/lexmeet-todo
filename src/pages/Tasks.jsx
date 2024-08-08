@@ -171,9 +171,9 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
 
   return (
     <section className="tasks-section tasks">
-      <h2>LIST NAME</h2>
+      {/* <h2>LIST NAME</h2> */}
       <TaskSummary numCompleted={numCompleted} totalTasks={tasks.length} handleNewTask={handleNewTask}/>
-      <h3>Tasks</h3>
+      {/* <h3>Tasks</h3> */}
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
       <ul>
