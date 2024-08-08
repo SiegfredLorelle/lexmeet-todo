@@ -206,16 +206,16 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
       return;
     }
     setIsChecked(!isChecked);
-    
+
     const newStatus = !isChecked ? 'Complete' : 'Incomplete';
-    const completedAt = !isChecked ? new Date().toISOString() : null
-    
+    const completedAt = !isChecked ? new Date().toISOString() : null;
+
     const updatedTask = {
       ...task,
       status: newStatus,
       completedAt: completedAt,
     };
-  
+
     handleEditTask(updatedTask, task.id);
   };
 
@@ -259,14 +259,20 @@ const TaskItem = ({ handleEditTask, handleDeleteTask, task }) => {
       />
       <div className="tasks-item-text">
         <div className="tasks-item-pills">
-          <span className={`tasks-item-pill priority-${task.priority.toLowerCase()}`}>
+          <span className={`tasks-item-pill priority-pill priority-${task.priority.toLowerCase()}`}>
             {task.priority}
           </span>
           <span className="tasks-item-pill">{calculateTimeLeft(task.deadline)}</span>
         </div>
         <span className="tasks-item-text-name">{task.name}</span>
       </div>
-      <div className="tasks-item-actions">
+      <div 
+        className="tasks-item-actions" 
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowActions(!showActions);
+        }}
+      >
         <div onClick={(e) => { e.stopPropagation(); }}>
           <ShowTaskInfo task={task}>
             <FontAwesomeIcon icon={faCircleInfo} />

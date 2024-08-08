@@ -76,7 +76,8 @@
   margin-bottom: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent pills from wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .tasks-item-text-name {
@@ -97,6 +98,15 @@
   background-color: $main-orange;
   font-size: 0.75em;
   color: $white;
+  white-space: nowrap; /* Prevent pills from wrapping */
+}
+
+.tasks-item-container .priority-pill {
+  display: inline-block;
+
+  @media (max-width: 425px) {
+    display: none;
+  }
 }
 
 .tasks-item-container.tasks-item-container.completed .tasks-item-pill {
