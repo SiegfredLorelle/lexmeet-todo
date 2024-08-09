@@ -10,8 +10,10 @@ const Header = ({ toggleListsSection }) => {
           {/* <button className="hamburger-menu" onClick={toggleListsSection}>
             <FontAwesomeIcon icon={faBars} />
           </button> */}
-          <img src="logo.png" alt="Logo" />
-          <h1 className="header-title">ToDo DuDu</h1>
+          <a href="/" className="header-link">
+            <img src="logo.png" alt="Logo" />
+            <h1 className="header-title">ToDo DuDu</h1>
+          </a>
         </div>
       </header>
     </>

@@ -25,6 +25,21 @@
   color: #555;
 }
 
+.header-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.header-link:hover {
+  color: inherit;
+}
+
+.header-link img {
+  margin-right: 10px;
+}
+
 .header-left img {
   width: 40px;
   height: 40px;
