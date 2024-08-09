@@ -183,7 +183,12 @@
 }
 
 .tasks-item-container.completed .tasks-item-actions > div > button {
-  background-color: $light-purple;
+  background-color: $medium-gray;
+  color: $dark-gray;
+}
+
+.tasks-item-container.completed .tasks-item-actions > div > button:hover {
+  background-color: $white;
 }
 
 .tasks-item-actions > div > button:hover {
