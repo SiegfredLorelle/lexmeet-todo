@@ -41,6 +41,9 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
           '#eeeeee'
         ],
         borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#FAFAFA",
+        rotation: 45,
       }
     ]
   }

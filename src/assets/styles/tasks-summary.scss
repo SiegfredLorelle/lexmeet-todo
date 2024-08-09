@@ -12,12 +12,11 @@
 }
 
 .tasks-summary-info-container {
-  background-color: $main-purple;
+  background: linear-gradient(160deg, #5E1B89 30%, $white 100%);
   height: 20vh;
   display: flex;
   border-radius: 24px;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tasks-summary-info {
@@ -42,8 +41,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 24px;
-  padding: 1rem;
   background-color: $light-orange;
+  transition: background-color 0.3s;
+}
+
+.tasks-summary-button-container:hover {
+  background-color: $main-orange;
+  border-radius: 24px;
 }
 
 .tasks-summary-button-container > button {
@@ -54,6 +58,9 @@
   font-size: 1.25em;
   color: $white;
   cursor: pointer;
+  :hover {
+    background-color: $main-orange;
+  }
 }
 
 .tasks-summary-description {
