@@ -178,7 +178,7 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
       {/* <h3>Tasks</h3> */}
       <ScrollableMenu commands={filterCommands} />
       <ScrollableMenu commands={sortCommands} />
-      <ul>
+      <ul className="tasks-items-container">
         {sortedTasks.length === 0 ? (
           <>
             <img className="no-task-img" src="sleeping-no-task.png" />
