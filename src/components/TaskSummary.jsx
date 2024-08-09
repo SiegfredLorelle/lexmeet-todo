@@ -21,7 +21,7 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
     };
   }, []);
 
-  const percentageCompleted = totalTasks > 0 ? ((numCompleted / totalTasks) * 100).toFixed(2) : 0;
+  const percentageCompleted = totalTasks > 0 ? ((numCompleted / totalTasks) * 100).toFixed(2) : "0.00";
   const numIncomplete = totalTasks - numCompleted;
 
   const doughnutData = {
@@ -70,9 +70,14 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
             <p className="tasks-summary-description">Completed</p>
             <p className="tasks-summary-percentage">{percentageCompleted}%</p>
           </div>
-          <div className="tasks-summary-doughnut-chart">
+          {
+          totalTasks !== 0 ? 
+          (<div className="tasks-summary-doughnut-chart">
             <Doughnut data={doughnutData} options={doughnutOptions} />
           </div>
+          ) : null
+
+          }
         </div>
         {windowWidth >= 768 ? (
           <div className="tasks-summary-button-container">
