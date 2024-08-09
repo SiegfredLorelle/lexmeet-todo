@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DeleteTaskModal from '../components/DeleteTaskModal';
 
-const DeleteTask = ({ option, task, handleDeleteTask, children }) => {
+const DeleteTask = ({ option, task, handleDeleteTask, disabled, children }) => {
   const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] = useState(false);
 
   const openDeleteTaskModal = () => {
@@ -14,7 +14,7 @@ const DeleteTask = ({ option, task, handleDeleteTask, children }) => {
 
   return (
     <>
-      <button onClick={(e) => { e.stopPropagation(); openDeleteTaskModal(); }}>{children}</button>
+      <button disabled={disabled} onClick={(e) => { e.stopPropagation(); openDeleteTaskModal(); }}>{children}</button>
       {
       <DeleteTaskModal
         isOpen={isDeleteTaskModalOpen}

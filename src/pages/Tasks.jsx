@@ -99,6 +99,7 @@ const Tasks = () => {
         handleDeleteCompleteTasks={handleDeleteCompleteTasks}
         handleMarkAllAsComplete={handleMarkAllAsComplete}
         handleUndo={handleUndo}
+        tasks={tasks}
       />
     </>
   );
@@ -302,7 +303,8 @@ const BottomControls = ({
   handleDeleteAllTasks,
   handleDeleteCompleteTasks,
   handleMarkAllAsComplete,
-  handleUndo
+  handleUndo,
+  tasks,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -310,20 +312,34 @@ const BottomControls = ({
     setIsMenuOpen(prevState => !prevState);
   };
 
+  const hasTasks = tasks.length === 0;
+  const hasCompletedTasks = tasks.some(task => task.status === "Complete");
+  const hasIncompletedTasks = tasks.some(task => task.status === "Incomplete");
+
   return (
     <div className="bottom-controls-container">
       {isMenuOpen && (
         <div className="additional-buttons">
-          <DeleteTask option={"ALL tasks"} task={null} handleDeleteTask={handleDeleteAllTasks}>
+          <DeleteTask 
+            option={"ALL tasks"} 
+            task={null} 
+            handleDeleteTask={handleDeleteAllTasks} 
+            disabled={hasTasks} 
+          >
             <FontAwesomeIcon icon={faTrash} /> <span>Delete All</span>
           </DeleteTask>
-          <DeleteTask option={"Completed tasks"} task={null} handleDeleteTask={handleDeleteCompleteTasks}>
+          <DeleteTask 
+            option={"Completed tasks"} 
+            task={null} 
+            handleDeleteTask={handleDeleteCompleteTasks} 
+            disabled={!hasCompletedTasks}
+          >
             <FontAwesomeIcon icon={faTrash} /> <span>Delete All Complete</span>
           </DeleteTask>
-          <button onClick={() => {handleMarkAllAsComplete(true)}}>
+          <button onClick={() => {handleMarkAllAsComplete(true)}} disabled={!hasIncompletedTasks}>
             <FontAwesomeIcon icon={faCheck} /> <span>Mark All Complete</span>
           </button>
-          <button onClick={() => {handleMarkAllAsComplete(false)}}>
+          <button onClick={() => {handleMarkAllAsComplete(false)}} disabled={!hasCompletedTasks}>
             <FontAwesomeIcon icon={faCheck} /> <span>Mark All Incomplete</span>
           </button>
         </div>
