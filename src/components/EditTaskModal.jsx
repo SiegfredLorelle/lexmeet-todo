@@ -35,10 +35,9 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 50);
 
-    if (deadlineDate > maxDate) {
+    if (isNaN(deadlineDate) || deadlineDate > maxDate) {
       newErrors.deadline = "Deadline cannot be too far away.";
     }
-
     return newErrors;
   };
 

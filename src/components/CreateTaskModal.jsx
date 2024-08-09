@@ -35,8 +35,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
     const deadlineDate = new Date(deadline);
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 100);
-
-    if (deadlineDate > maxDate) {
+    if (isNaN(deadlineDate) || deadlineDate > maxDate) {
       newErrors.deadline = "Deadline cannot be too far away.";
     }
 
