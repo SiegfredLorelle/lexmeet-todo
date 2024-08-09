@@ -71,7 +71,14 @@ button {
 
 button:hover {
   border-color: #646cff;
+  cursor: pointer;
 }
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: initial;
+}
+
 button:focus-visible {
   outline: 1px auto;
 }
