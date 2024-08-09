@@ -13,6 +13,22 @@
   align-items: center;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  margin-left: 20px;
+  font-size: 1.5rem;
+  color: $dark-gray;
+  text-decoration: none;
+}
+
+.header-icon:hover {
+  color: $dark-gray;
+}
+
 .hamburger-menu {
   background: none;
   border: none;
