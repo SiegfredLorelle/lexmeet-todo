@@ -37,8 +37,8 @@ const TaskSummary = ({ numCompleted, totalTasks, handleNewTask }) => {
           numIncomplete
         ],
         backgroundColor: [
-          '#e26d1f', 
-          '#e0e0e0'
+          '#FF7F4D', 
+          '#eeeeee'
         ],
         borderRadius: 8,
       }

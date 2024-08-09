@@ -124,7 +124,7 @@
   display: inline-block;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
-  background-color: $main-orange;
+  background-color: $light-orange;
   font-size: 0.75em;
   color: $white;
   white-space: nowrap; 
@@ -145,7 +145,7 @@
 .tasks-item-actions {
   display: flex;
   gap: 0.5rem;
-  align-items: stretch; /* Ensure action buttons take the entire height */
+  align-items: stretch;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   @media (min-width: 768px) {
@@ -166,7 +166,6 @@
 .tasks-item-actions > div > button {
   min-height: 2rem;
   min-width: 2rem;
-  background-color: $light-orange;
   color: $white;
   border: none;
   padding: 0.5rem;
@@ -184,11 +183,11 @@
 }
 
 .tasks-item-container.completed .tasks-item-actions > div > button {
-  background-color: $main-orange;
+  background-color: $light-purple;
 }
 
 .tasks-item-actions > div > button:hover {
-  background-color: $main-orange;
+  background-color: $light-purple;
 }
 
 .bottom-controls-container {

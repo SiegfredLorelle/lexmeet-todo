@@ -20,7 +20,7 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
         priority: task.priority,
         deadline: task.deadline,
       });
-      setErrors({}); // Reset errors when task changes
+      setErrors({});
     }
   }, [task]);
 
@@ -90,7 +90,7 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
                 name="name"
                 value={taskData.name}
                 onChange={handleChange}
-                maxLength={100} // Limit to 100 characters
+                maxLength={100}
                 required
               />
               {errors.name && <p className="error-message">{errors.name}</p>}
@@ -102,7 +102,7 @@ const EditTaskModal = ({ isOpen, onClose, task, onSubmit }) => {
                 name="description"
                 value={taskData.description}
                 onChange={handleChange}
-                maxLength={100} // Limit to 100 characters
+                maxLength={100}
               />
               {errors.description && <p className="error-message">{errors.description}</p>}
             </div>

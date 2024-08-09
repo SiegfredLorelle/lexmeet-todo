@@ -58,7 +58,7 @@
 .modal.create-task-modal select,
 .modal.create-task-modal textarea {
   width: 100%;
-  padding: 8px;
+  padding: 0.5rem;
   box-sizing: border-box;
   border-radius: 16px;
   border: none;
@@ -73,16 +73,22 @@
   min-height: 80px;
 }
 
+.modal.create-task-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
 
 .modal.create-task-modal button[type="submit"] {
   margin-top: 10px;
-  padding: 10px 15px;
+  padding: 0.75em 1.25rem;
   background-color: $main-orange;
-  color:$white;
+  color: white;
   border: none;
   cursor: pointer;
   border-radius: 24px;
   width: initial;
+  flex: initial;
 
 }
 

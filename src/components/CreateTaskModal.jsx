@@ -6,7 +6,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [priority, setPriority] = useState('medium'); // Default to medium
+  const [priority, setPriority] = useState('medium');
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
       setName('');
       setDescription('');
       setPriority('Medium'); 
-      setErrors({}); // Reset errors when modal opens
+      setErrors({});
     } 
   }, [isOpen]);
 
@@ -79,7 +79,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 id="taskName"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                maxLength={100} // Limit to 100 characters
+                maxLength={100}
                 required
               />
               {errors.name && <p className="error-message">{errors.name}</p>}
@@ -90,7 +90,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 id="taskDescription"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                maxLength={100} // Limit to 100 characters
+                maxLength={100}
               ></textarea>
               {errors.description && <p className="error-message">{errors.description}</p>}
             </div>
@@ -118,7 +118,9 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 <option value="Low">Low</option>
               </select>
             </div>
-            <button type="submit">Create Task</button>
+            <div className="modal-footer">
+              <button type="submit">Create</button>
+            </div>
           </form>
         </div>
       </div>
