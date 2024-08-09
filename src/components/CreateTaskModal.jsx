@@ -7,6 +7,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
   const [priority, setPriority] = useState('medium'); // Default to medium
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (isOpen) {
@@ -20,13 +21,38 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
       setName('');
       setDescription('');
       setPriority('Medium'); 
-
+      setErrors({}); // Reset errors when modal opens
     } 
   }, [isOpen]);
 
+  const validateInputs = () => {
+    const newErrors = {};
+
+    if (!name.trim()) {
+      newErrors.name = "Task name cannot be empty or just whitespace.";
+    }
+
+    const deadlineDate = new Date(deadline);
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 100);
+
+    if (deadlineDate > maxDate) {
+      newErrors.deadline = "Deadline cannot be too far away.";
+    }
+
+    return newErrors;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const taskData = { name, description, deadline, priority };
+
+    const validationErrors = validateInputs();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    const taskData = { name: name.trim(), description: description.trim(), deadline, priority };
     onSubmit(taskData);
     onClose();
   };
@@ -53,8 +79,10 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 id="taskName"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                maxLength={100} // Limit to 100 characters
                 required
               />
+              {errors.name && <p className="error-message">{errors.name}</p>}
             </div>
             <div className="form-group">
               <label htmlFor="taskDescription">Description (Optional)</label>
@@ -62,7 +90,9 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 id="taskDescription"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                maxLength={100} // Limit to 100 characters
               ></textarea>
+              {errors.description && <p className="error-message">{errors.description}</p>}
             </div>
             <div className="form-group">
               <label htmlFor="deadline">Deadline</label>
@@ -73,6 +103,7 @@ const CreateTaskModal = ({ isOpen, onClose, onSubmit }) => {
                 onChange={(e) => setDeadline(e.target.value)}
                 required
               />
+              {errors.deadline && <p className="error-message">{errors.deadline}</p>}
             </div>
             <div className="form-group">
               <label htmlFor="priority">Priority</label>
