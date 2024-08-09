@@ -17,7 +17,7 @@ const DeleteTaskModal = ({ isOpen, onClose, name, onConfirm }) => {
         <div className="modal-content">
           <h2 className="modal-title">Delete Task</h2>
           <div className="modal-body">
-            <p>Are you sure you want to delete the "{name}"?</p>
+            <p>Are you sure you want to delete "{name}"?</p>
           </div>
           <div className="modal-footer">
             <button autoFocus onClick={onClose} className="cancel-button">Cancel</button>

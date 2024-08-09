@@ -6,13 +6,15 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
 }
 
 .modal.task-info-modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.9); 
   padding: 2rem;
   z-index: 1001;
   background: $main-purple;
@@ -20,6 +22,8 @@
   max-width: 36rem;
   border-radius: 24px;
   color: $white;
+  opacity: 0;
+  animation: fadeInModal 0.3s forwards 0.1s;
 
   .close-button {
     position: absolute;
