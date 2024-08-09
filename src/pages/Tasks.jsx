@@ -180,7 +180,10 @@ const TasksSection = ({ handleNewTask, handleEditTask, handleDeleteTask, tasks }
       <ScrollableMenu commands={sortCommands} />
       <ul>
         {sortedTasks.length === 0 ? (
-          <p className="no-task-message">No Tasks yet. Feel free to add a task.</p>
+          <>
+            <img className="no-task-img" src="sleeping-no-task.png" />
+            <p className="no-task-message">No Tasks yet. Feel free to add a task.</p>
+          </>
         ) : (
           sortedTasks.map(task => (
             <TaskItem
